@@ -1,0 +1,60 @@
+body{
+	background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url("../images/backdrop.jpg");
+    background-size: cover;
+
+}
+
+i{
+	font-size: 10vh;
+	color:black;
+}
+.contact{
+	padding: 4%;
+	height: 400px;
+}
+.col-md-3{
+	background: brown;
+	padding: 4%;
+	border-top-left-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+}
+.contact-info{
+	margin-top:10%;
+}
+.contact-info img{
+	width: 15vw;
+	margin-bottom: 10%;
+	margin-top: 20%;
+}
+.contact-info h3{
+	margin-bottom: 10%;
+	margin-top: 20%;
+	color: black;
+}
+.contact-info h4{
+	margin-bottom: 10%;
+	margin-top: 20%;
+	color: black;
+}
+.col-md-9{
+	background: #fff;
+	padding: 3%;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+}
+.texts{
+	font-weight:600;
+	color: black;
+	text-align: left;
+	margin-left: 0;
+	margin-bottom: 1%;	
+}
+.contact-form button{
+	background: brown;
+	color: #fff;
+	font-weight: 600;
+	width: 25%;
+}
+.contact-form button:focus{
+	box-shadow:none;
+}
