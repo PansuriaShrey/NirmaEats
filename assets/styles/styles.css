@@ -1,0 +1,39 @@
+body{
+    font-family: 'Noto Serif', serif;
+}
+
+.container {
+    margin: 6% auto;
+    font-family: 'Noto Serif', serif;
+    color: white;
+    text-align: center;
+    /* font-family: 'Noto Serif', serif; */
+}
+
+.bg-dark {
+    background-color: brown!important;
+}
+
+.navbar {
+    margin: .3rem;
+    border-radius: 10px;
+    
+}
+
+
+.navbar-brand {
+    padding: 0.3125rem;
+    margin-left: 0.3125rem;
+    font-size: 1.25rem;
+}
+
+.navbar-nav {
+    font-size: 1.15rem;
+    font-family: 'Noto Serif', serif;
+}
+
+/* img {
+    max-width:10%;
+    height:auto;cccccccccc
+} */
+

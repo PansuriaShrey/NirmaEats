@@ -1,0 +1,114 @@
+body {
+    background: url(backdrop.jpg);
+}
+.form {
+    margin: 50px auto;
+    width: 300px;
+    color: #666;
+    font-family: arial;
+    padding: 30px 25px;
+    background: white;
+    opacity: 1;
+}
+
+.field_set {
+    border: 1px solid #ccc;
+}
+
+.error {
+    font-size: 12px;
+    color:brown;
+    margin-bottom: 10px;
+
+}
+
+h1.login-title {
+    margin: 0px auto 25px;
+    font-size: 25px;
+    font-weight: 300;
+    text-align: center;
+    color:#666;
+}
+
+table, th, td {
+  border: 0px solid black;
+  border-collapse: collapse;
+}
+
+.login-area {
+
+    font-weight: 100;
+    font-family: arial;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 1px;
+    height: 80px;
+    width: calc(100% - 23px);
+}
+.login-area:focus {
+    font-weight: 300;
+    font-family: arial;
+    border-color: brown;
+    outline: none;
+}
+
+.login-input {
+    font-size: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 1px;
+    height: 25px;
+    width: calc(100% - 23px);
+}
+.login-input:focus {
+    border-color: brown;
+    outline: none;
+}
+
+.login-input[type="checkbox"]:checked {
+    background: brown;
+    border-color: brown;
+    outline: brown;
+}
+
+.login-button {
+    color: #fff;
+    background: brown;
+    border: 0;
+    outline: 0;
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    
+    text-align: center;
+    cursor: pointer;
+}
+.link {
+    color: #666;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 0px;
+}
+.link a {
+    color: #666;
+    underline: none;
+}
+
+input[aria-invalid="true"], textarea[aria-invalid="true"] {
+  border: 1px solid #f00;
+  box-shadow: 0 0 4px 0 #f00;
+}
+
+footer {
+  text-align: center;
+}
+footer p {
+  color: #fff;
+}
+
+
+h3 {
+    font-weight: normal;
+    text-align: center;
+}
