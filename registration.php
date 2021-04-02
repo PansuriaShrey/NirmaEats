@@ -95,7 +95,7 @@
                 <span class="error" ng-show="personForm.mobilenumber.$dirty&&personForm.mobilenumber.$error.pattern">Mobile Number Should be 10 digits</span><br>
 
 
-                <input type="submit" name="submit" value="Register" class="login-button">
+                <input type="submit" name="submit" ng-disabled="personForm.$pristine || !personForm.username.$valid || !personForm.email.$valid ||!personForm.password.$valid || !personForm.passwordcon.$valid || !personForm.mobilenumber.$valid" value="Register" class="login-button">
                 <p class="link">Already have an account? <a href="login.php">Login here</a></p>
     </form>
 </div>
