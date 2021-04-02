@@ -24,12 +24,13 @@
         if ($rows == 1) {
             // $_SESSION['resEmailId'] = $email;
             $resid=mysqli_fetch_assoc($result)['resId'];
+            $_SESSION["resid"] = $resid;
             // Redirect to user dashboard page
             echo "<div class='form'>
                   <h3>You have been directed to the required page</h3><br/>
                   <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
                   </div>";
-            //header("Location: dashboard.php");
+            header("Location: res_login.php");
         } else {
             echo  "<div class = 'form'>
                   <h3>Incorrect Username/password.</h3><br/>
