@@ -121,12 +121,13 @@
             $tempsql.=$resid;
             $resname=mysqli_query($conn,$tempsql);
             $resname=mysqli_fetch_assoc($resname)["resName"];
+            $review=$row["review"];
             // print_r($resname);
             $date=$row["Date"];
             $billamount=$row["totalPay"];
             echo "
                 <div class='mb-3' style='border:3px solid white;'>
-                <div class='container mb-3 mt-3 text-light'>
+                <div class='container-shrey mb-3 mt-3 text-light '>
                     <div class='row'>
                         <div class='col-sm text-center'>
                         BILL ID : $billid
@@ -139,8 +140,25 @@
                         </div>
                         <div class='col-sm text-center'>
                         Date : $date
+                        </div>";
+            
+            if($review==0){
+                // Review is left
+                echo "
+                        <div class='col-sm text-center'>
+                            <a href='review_bill.php?billid=$billid' class='text-danger bg-light pl-1 pr-1'> Review</a>
                         </div>
-                    </div>
+                ";
+            }
+            else{
+                echo "
+                        <div class='col-sm text-center'>
+                            <a href='#' class='text-success bg-light pl-1 pr-1'> Already Reviewed</a>
+                        </div>
+                ";
+            }
+
+            echo "  </div>
                 </div>
             ";
             //SELECT * FROM billDetails,dish WHERE billDetails.dishId=dish.DishId && billDetails.billId=1
