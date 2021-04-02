@@ -15,7 +15,9 @@
 
 <?php
 
-    session_start();
+    include("auth_session_res.php");
+
+
     $resid=$_SESSION["resid"];
 
     // Getting Name of RESTAURANT
@@ -253,7 +255,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     if($addMulDishSubmit) {
-        messageAlert("success", "Multiple Dishes added Successfully.");
+        // messageAlert("success", "Multiple Dishes added Successfully.");
+
+        
     }
 
 
