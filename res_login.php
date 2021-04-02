@@ -15,8 +15,8 @@
 
 <?php
 
-    include("auth_session_res.php");
-
+    session_start();
+    $_SESSION["resid"] = 1;
     $resid=$_SESSION["resid"];
 
     // Getting Name of RESTAURANT
@@ -95,6 +95,10 @@
         .card-body {
             color: brown;
         }
+        .testimonial-img {
+            width: 200px;
+            height: 200px;
+        }
         @media (max-width: 990px) {
             .testimonials .testimonial-wrap {
                 padding-left: 0;
@@ -107,7 +111,20 @@
                 position: static;
                 left: auto;
             }
+            .testimonial-img {
+            max-width: 100%;
+            height: auto;
+            }
         }
+        .mydiv {
+            margin-left: 35%;
+        }
+        @media (max-width: 990px) {
+            .mydiv {
+                margin-left: 0%;
+            }
+        }
+
     </style>
 </head>
 
@@ -134,7 +151,7 @@
                 <a class="nav-link" href="myorder.php">My Orders</a>
                 </li> -->
                 <li class="nav-item">
-                <a class="nav-link" href="logout_res.php">Log Out</a>
+                <a class="nav-link" href="#">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -512,12 +529,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // $categories = array("Salad", "Starters", "Vegetable", "Dosa");
     $categories = array();
 
-    $query = "SELECT DISTINCT(dishType) FROM `dish`";
+    $query = "SELECT DISTINCT(dishType) FROM `dish` WHERE resId='$resid'";
     $dishes = mysqli_query($conn, $query);
     while($rows = mysqli_fetch_assoc($dishes)) {
         array_push($categories, $rows['dishType']);
     }
-
+    print_r($categories);
     // dropdown for navigation
     echo '  <div class="dropdown">
                 <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Select Category
@@ -537,7 +554,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <br><h3 style='text-align: left'>$value</h3>
                 </div>";
 
-        $query = "SELECT * FROM `dish` WHERE dishType='$value'";
+        $query = "SELECT * FROM `dish` WHERE dishType='$value' AND resId='$resid'";
 
         $dishes = mysqli_query($conn, $query);
 
@@ -548,6 +565,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<div class='testimonials-slider swiper-container'><div>";
         $i=0;
         while($row = mysqli_fetch_assoc($dishes)) {
+            $dishName = $row["dishName"];
+            $dishPrice = $row["dishPrice"];
+            $dishDesc = $row["dishDesc"];
+            $dishVeg = $row["dishVeg"];
+            $dishPicture = $row["dishPicture"];
 
             $i++;
             if($i%2) {
@@ -557,14 +579,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div style='width: 50%' class='swiper-slide'>
                 <div class='testimonial-wrap'>
                     <div class='testimonial-item'>
-                        <img style='max-width: 100%' src='assets/images/dish1.jpeg' class='testimonial-img' alt=''>
-                        <h3>Bill ID</h3>
-                        <h4>Date</h4>
-                        <h4>Total Payment</h4>
-                        <p>
-                            Total Dishes<br>
-                            Restaurant
-                        </p>
+                    <div class='mydiv'>
+                        <img style='color: black;' src='assets/images/$dishPicture' class='testimonial-img img-fluid' alt='&nbsp;&nbsp;&nbsp;&nbsp;No image found'>
+                        <h2 style='color: black;'>$dishName</h2>
+                        <h3>$dishDesc</h3>
+                        <h3>Rs $dishPrice /-</h3>
+                        <h3>$dishVeg</h3>
+                    </div>
                     </div>
                 </div>
                 </div>
