@@ -42,41 +42,67 @@
             $resType .= $color;
             $resType .= "/";
         }
-        $resPicture = $_REQUEST['resPicture'];
+        if(strlen($resType)>0){
+            substr_replace($resType, "", -1);
+        }
+
+        // Image File Location
+        // $resPicture = $_REQUEST['resPicture'];
+        $uploaddir="./assets/images/";
+        $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"NirmaEats\" AND TABLE_NAME = \"restaurant\";";
+        $next_res_id=mysqli_query($con,$tempsql);
+        $next_res_id=mysqli_fetch_assoc($next_res_id)["AUTO_INCREMENT"];
+        $getend=$_FILES['resPicture']['name'];
+        // print_r($getend);
+        // echo "<br>";
+        $getend=explode(".",$getend);
+        $sz=count($getend);
+        $last="";
+        $last=$getend[$sz-1];
+        // print_r($last);
+        $filename="res".$next_res_id.".".$last;
+        // print_r($filename);
+        // echo "<br>";
+        $uploadfile=$uploaddir.$filename;
+        if (move_uploaded_file($_FILES['resPicture']['tmp_name'], $uploadfile)) {
+            echo "File is valid, and was successfully uploaded.\n";
+        } else {
+            echo "Upload failed a";
+        }
+
         $resOpeningTime = $_REQUEST['resOpeningTime'];
         $resClosingTime = $_REQUEST['resClosingTime'];
         $password = $_REQUEST['password'];
 
-        echo $resName;
-        echo $resEmailId;
-        echo $resAddress;
-        echo $resType;
-        echo $resOpeningTime;
-        echo $resClosingTime;
-        echo $password;
+        // echo $resName;
+        // echo $resEmailId;
+        // echo $resAddress;
+        // echo $resType;
+        // echo $resOpeningTime;
+        // echo $resClosingTime;
+        // echo $password;
 
         $query = "INSERT INTO restaurant "
         ."(resName, resEmailId, resAddress, resType, resPicture, resOpeningTime, resClosingTime, password) VALUES "
-        ."('$resName', '$resEmailId', '$resAddress', '$resType', '$resPicture', '$resOpeningTime', '$resClosingTime', '$password');";
+        ."('$resName', '$resEmailId', '$resAddress', '$resType', '$filename', '$resOpeningTime', '$resClosingTime', '$password');";
 
         $result   = mysqli_query($con, $query);
         if ($result) {
             echo "<div class='form'>
                   <h3>You are registered successfully.</h3><br/>
-                  <p class='link'>Click here to <a href='login.php'>Login</a></p>
+                  <p class='link'>Click here to <a href='login_restaurant.php'>Login</a></p>
                   </div>";
         } else {
-            echo "<div>
+            echo "<div class='form'>
                   <h3>Query wasnt updated.</h3><br/>
-                  <p> $con->error; </p>
-                  <p class='link'>Click here to <a href='registration_restaurant.php'>registration</a> again.</p>
+                  <p class='link'>Click here to <a href='login_restaurant.php'>registration</a> again.</p>
                   </div>";
         }
     
     } else {
 ?>
     <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
-    <form class="form" action="" method="post" name="restaurantForm" novalidate ng-submit="restaurantForm.$valid &&sendForm()" 
+    <form class="form" action="" method="post" name="restaurantForm" novalidate ng-submit="restaurantForm.$valid &&sendForm()" enctype="multipart/form-data"
     autocomplete="off">
         <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
         <hr>

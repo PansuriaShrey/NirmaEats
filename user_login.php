@@ -208,7 +208,7 @@
             }
             echo "
                 <div class='col mb-4 ' style='margin:2%; max-width: 30%;'>
-                    <div class='card'>
+                    <div class='card w-100 h-100'>
                         <img src='assets/images/$rpic' width='250' height='250' class='card-img-top img2' alt='...'>
                         <div class='card-body table-responsive'>
                                 <table class='table table-light w-auto'>

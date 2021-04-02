@@ -45,7 +45,7 @@
     <!-- <link href="assets/styles/login_user.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="assets/styles/styles.css">
     <link rel="stylesheet" href="assets/styles/index.css">
-    <title>Dashboard</title>
+    <title>Log Out</title>
 </head>
 
 <body>
@@ -67,7 +67,7 @@
                 <a class="nav-link" href="user_login.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="progile.php">My Profile</a>
+                <a class="nav-link" href="profile.php">My Profile</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="myorder.php">My Orders</a>
