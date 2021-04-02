@@ -147,11 +147,8 @@
                 <li class="nav-item">
                 <a class="nav-link" href="res_profile.php">My Profile</a>
                 </li>
-                <!-- <li class="nav-item">
-                <a class="nav-link" href="myorder.php">My Orders</a>
-                </li> -->
                 <li class="nav-item">
-                <a class="nav-link" href="#">Log Out</a>
+                <a class="nav-link" href="logout_res.php">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -534,7 +531,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     while($rows = mysqli_fetch_assoc($dishes)) {
         array_push($categories, $rows['dishType']);
     }
-    print_r($categories);
+
     // dropdown for navigation
     echo '  <div class="dropdown">
                 <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Select Category
