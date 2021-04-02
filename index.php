@@ -1,3 +1,29 @@
+<?php
+    require('db.php');
+    $conn=$con;
+
+    $tempsql="SELECT * FROM `user`";
+    $tempsql.=$userid;
+    $users=mysqli_query($conn,$tempsql);
+    $users=mysqli_num_rows($users);
+
+    $tempsql="SELECT * FROM `restaurant`";
+    $tempsql.=$userid;
+    $restaurants=mysqli_query($conn,$tempsql);
+    $restaurants=mysqli_num_rows($restaurants);
+
+    $tempsql="SELECT * FROM `bill`";
+    $tempsql.=$userid;
+    $bill=mysqli_query($conn,$tempsql);
+    $bill=mysqli_num_rows($bill);
+
+    $tempsql="SELECT * FROM `dish`";
+    $tempsql.=$userid;
+    $dish=mysqli_query($conn,$tempsql);
+    $dish=mysqli_num_rows($dish);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,6 +85,47 @@
             </form>
         </div>
     <!-- </div> -->
+
+    <div class="container mt-5 mb-2">
+    <div class="row border border-success ">
+            <div class="col-sm bg-light text-dark">
+                <!-- <h5 class="mt-1 mb-1">Strengthing the Relation between Customers and Restaurants</h5> -->
+                <h4 class="mt-1 mb-1 text-uppercase font-weight-bold">Get the food you want</h4>
+            </div>
+        </div>
+        <div class="row border-bottom border-primary ">
+            <div class="col-sm bg-light text-dark border-right border-dark">
+            Number of Customers
+            </div>
+            <div class="col-sm bg-light text-dark">
+                <?php echo $users;?>
+            </div>
+        </div>
+        <div class="row border-bottom border-secondary ">
+            <div class="col-sm bg-light text-dark border-right border-dark">
+            Number of Restaurants
+            </div>
+            <div class="col-sm bg-light text-dark">
+                <?php echo $restaurants;?>
+            </div>
+        </div>
+        <div class="row border-bottom border-danger ">
+            <div class="col-sm bg-light text-dark border-right border-dark">
+            Orders Proceeded
+            </div>
+            <div class="col-sm bg-light text-dark">
+                <?php echo $bill;?>
+            </div>
+        </div>
+        <div class="row border-bottom border-info ">
+            <div class="col-sm bg-light text-dark border-right border-dark">
+            Total Dishes 
+            </div>
+            <div class="col-sm bg-light text-dark">
+                <?php echo $dish;?>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
