@@ -23,6 +23,8 @@
             return checkboxes.reduce((acc, curr) => acc || curr.checked, false);
         }
 
+    }
+
     </script>
 
 </head>
@@ -105,7 +107,7 @@
     } else {
 ?>
     <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
-    <form class="form" action="" method="post" name="restaurantForm" novalidate ng-submit="restaurantForm.$valid &&sendForm()" enctype="multipart/form-data"
+    <form class="form" action="" method="post" name="restaurantForm" novalidate ng-submit="sendForm()" enctype="multipart/form-data"
     autocomplete="off">
         <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
         <hr>
@@ -220,8 +222,10 @@
                 <span class="error" ng-show="restaurantForm.passwordcon.$error.required">*</span>
                 <span class="error" ng-show="password != passwordcon">Passwords Dont match</span><br>
         
-                <input type="submit" name="submit" value="Register" class="login-button">
+                <input type="submit" name="submit" ng-disabled="restaurantForm.$pristine || !restaurantForm.resName.$valid || !restaurantForm.resEmailId.$valid || !restaurantForm.resAddress.$valid || !restaurantForm.password.$valid || !restaurantForm.passwordcon.$valid" value="Register" class="login-button">
+                <span class="error" ng-show="restaurantForm.$pristine">Pristine</span>
                 <p class="link">Already have an account? <a href="login_restaurant.php">Login here</a></p>
+
 
     </form>
 </div>
