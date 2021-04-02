@@ -16,7 +16,7 @@
 <?php
 
     session_start();
-    $_SESSION["resid"] = 1;
+    // $_SESSION["resid"] = 1;
     $resid=$_SESSION["resid"];
 
     // Getting Name of RESTAURANT
