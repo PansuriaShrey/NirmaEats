@@ -3,22 +3,18 @@
     $conn=$con;
 
     $tempsql="SELECT * FROM `user`";
-    $tempsql.=$userid;
     $users=mysqli_query($conn,$tempsql);
     $users=mysqli_num_rows($users);
 
     $tempsql="SELECT * FROM `restaurant`";
-    $tempsql.=$userid;
     $restaurants=mysqli_query($conn,$tempsql);
     $restaurants=mysqli_num_rows($restaurants);
 
     $tempsql="SELECT * FROM `bill`";
-    $tempsql.=$userid;
     $bill=mysqli_query($conn,$tempsql);
     $bill=mysqli_num_rows($bill);
 
     $tempsql="SELECT * FROM `dish`";
-    $tempsql.=$userid;
     $dish=mysqli_query($conn,$tempsql);
     $dish=mysqli_num_rows($dish);
 
@@ -80,7 +76,7 @@
         <div class="container mt-0 mb-0 d-flex justify-content-center w-100">
             <form action="login_restaurant.php">
                 <button class="btn btn-danger mb-3 btn-lg">
-                    LogIn/SignUp as Restuarant
+                    LogIn/SignUp as Restaurant
                 </button>
             </form>
         </div>
