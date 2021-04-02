@@ -30,7 +30,7 @@ body {
     text-align: center;
   }
   .text a {
-    color: #0fe4d2;
+    color: #e40f3d;
   }
   
   .has-animation {
@@ -51,7 +51,7 @@ body {
     z-index: 10;
   }
   .has-animation.animate-in:before {
-    background-color: #0fe4d2;
+    background-color: rgb(60, 155, 199);
   }
   .has-animation.animate-in:after {
     background-color: #202020;
