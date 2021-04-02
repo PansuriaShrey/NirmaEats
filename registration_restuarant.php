@@ -53,6 +53,7 @@
         $next_res_id=mysqli_query($con,$tempsql);
         $next_res_id=mysqli_fetch_assoc($next_res_id)["AUTO_INCREMENT"];
         $getend=$_FILES['resPicture']['name'];
+        print_r($_FILES['resPicture']);
         // print_r($getend);
         // echo "<br>";
         $getend=explode(".",$getend);
@@ -64,10 +65,12 @@
         // print_r($filename);
         // echo "<br>";
         $uploadfile=$uploaddir.$filename;
+
         if (move_uploaded_file($_FILES['resPicture']['tmp_name'], $uploadfile)) {
             echo "File is valid, and was successfully uploaded.\n";
         } else {
-            echo "Upload failed a";
+            echo "Upload failed a".$_FILES["resPicture"]["error"];
+            echo file_put_contents($uploadfile, 'testing_writing_to_file');
         }
 
         $resOpeningTime = $_REQUEST['resOpeningTime'];
