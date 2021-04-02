@@ -152,9 +152,23 @@
     <div class="row px-5">
         <div class="col-md-7">
             <div class="shopping-cart">
-                <h6>My Cart</h6>
+                <?php 
+                    if(mysqli_num_rows($entirecart)==0){
+                        echo "<h6>My Cart (Currently Empty)</h6>";
+                    }
+                    else{
+                        // Restuarant Name
+                        $tempresid=mysqli_fetch_assoc($entirecart)["resId"];
+                        $temp="SELECT * FROM `restaurant` WHERE resId=$tempresid";
+                        $temp=mysqli_query($conn,$temp);
+                        $resName=mysqli_fetch_assoc($temp)["resName"];
+                        echo "<h6>$resName</h6>";
+                    }
+                ?>
                 <hr>
                 <?php
+                    $tempsql="SELECT * FROM `cartDetail` WHERE cartId=$cartid";
+                    $entirecart=mysqli_query($conn,$tempsql);
                     $total=0;
                     $count=0;
                     while($row = mysqli_fetch_assoc($entirecart)){
