@@ -90,14 +90,12 @@
 
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts section-bg">
-    <div class="col-sm bg-light text-dark">
+            <div>
                 <!-- <h5 class="mt-1 mb-1">Strengthing the Relation between Customers and Restaurants</h5> -->
-                <h4 class="mt-1 mb-1 text-uppercase font-weight-bold">Get the food you want</h4>
+                <h4 class="mt-1 mb-1 text-uppercase font-weight-bold" style="color: lavenderblush; font-size: 2rem;">Get the food you want</h4>
             </div>
-      <div class="container">
-
-      
-
+        <br>
+      <div class="container" style="margin-top: 5vh; margin-bottom: 1vh;">
         <div class="row counters">
 
           <div class="col-lg-3 col-6 text-center">
