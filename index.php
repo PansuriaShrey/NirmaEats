@@ -33,6 +33,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/styles/styles.css">
     <link rel="stylesheet" href="assets/styles/index.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/index2.css">
 
     <title>Home</title>
 </head>
@@ -61,8 +63,12 @@
         </div>
     </nav>
 
-    <div class="container mb-4 mt-4">
-        <h1>Welcome to NirmaEats.</h1>
+    <!-- <div class="container mb-4 mt-4">
+        <h1 class="has-animation animation-ltr text-uppercase" data-delay="10">Welcome to NirmaEats.</h1>
+    </div> -->
+
+    <div class="has-animation animation-ltr" data-delay="10">
+        <h1 class="bigger text-light">Welcome to NirmaEats </h1>
     </div>
 
     <!-- <div class="container mt-0 mb-0 d-flex justify-content-center"> -->
@@ -82,51 +88,46 @@
         </div>
     <!-- </div> -->
 
-    <div class="container mt-5 mb-2">
-    <div class="row border border-success ">
-            <div class="col-sm bg-light text-dark">
+    <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts section-bg">
+    <div class="col-sm bg-light text-dark">
                 <!-- <h5 class="mt-1 mb-1">Strengthing the Relation between Customers and Restaurants</h5> -->
                 <h4 class="mt-1 mb-1 text-uppercase font-weight-bold">Get the food you want</h4>
             </div>
-        </div>
-        <div class="row border-bottom border-primary ">
-            <div class="col-sm bg-light text-dark border-right border-dark">
-            Number of Customers
-            </div>
-            <div class="col-sm bg-light text-dark">
-                <?php echo $users;?>
-            </div>
-        </div>
-        <div class="row border-bottom border-secondary ">
-            <div class="col-sm bg-light text-dark border-right border-dark">
-            Number of Restaurants
-            </div>
-            <div class="col-sm bg-light text-dark">
-                <?php echo $restaurants;?>
-            </div>
-        </div>
-        <div class="row border-bottom border-danger ">
-            <div class="col-sm bg-light text-dark border-right border-dark">
-            Orders Proceeded
-            </div>
-            <div class="col-sm bg-light text-dark">
-                <?php echo $bill;?>
-            </div>
-        </div>
-        <div class="row border-bottom border-info ">
-            <div class="col-sm bg-light text-dark border-right border-dark">
-            Total Dishes 
-            </div>
-            <div class="col-sm bg-light text-dark">
-                <?php echo $dish;?>
-            </div>
-        </div>
-    </div>
+      <div class="container">
 
+      
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <div class="row counters">
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="<?php echo $users;?>" data-purecounter-duration="1"  class="purecounter"></span>
+            <p>Customers</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="<?php echo $restaurants;?>" data-purecounter-duration="50" class="purecounter"></span>
+            <p>Restaurants</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="<?php echo $bill;?>" data-purecounter-duration="50" class="purecounter"></span>
+            <p>Orders Placed</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="<?php echo $dish;?>" data-purecounter-duration="50" class="purecounter"></span>
+            <p>Total Dishes </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Counts Section -->
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script  src="assets/js/demo.js"></script>
+<script src="assets/js/counter.js"></script>
 
 </body>
 
