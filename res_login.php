@@ -16,7 +16,7 @@
 <?php
 
     include("auth_session_res.php");
-    
+
     $resid=$_SESSION["resid"];
 
     // Getting Name of RESTAURANT
@@ -71,8 +71,8 @@
     <link href="assets/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="assets/remixicon/remixicon.css" rel="stylesheet">
     <link href="assets/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <link href="assets/styles/login_user.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles/styles.css">
+    <link href="assets/styles/login_res.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/styles_res.css">
     <link rel="stylesheet" href="assets/styles/index.css">
     <title>Home</title>
     <style>
@@ -134,7 +134,7 @@
                 <a class="nav-link" href="myorder.php">My Orders</a>
                 </li> -->
                 <li class="nav-item">
-                <a class="nav-link" href="#">Log Out</a>
+                <a class="nav-link" href="logout_res.php">Log Out</a>
                 </li>
             </ul>
         </div>
