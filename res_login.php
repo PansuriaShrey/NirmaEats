@@ -257,7 +257,89 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if($addMulDishSubmit) {
         // messageAlert("success", "Multiple Dishes added Successfully.");
 
-        
+        $fileDir = "./assets/files/";
+        $fileName = "tempCSV.csv";
+        $uploadfile = $fileDir.$fileName;
+
+        $getend = $_FILES['uploadfile']['name'];
+        $getend = explode(".",$getend);
+        $sz = count($getend);
+        $ext = $getend[$sz-1];
+
+        if($ext=="csv") {
+
+            
+            if (move_uploaded_file($_FILES['uploadfile']['tmp_name'], $uploadfile)) {
+                // messageAlert("success", "File is valid, and was successfully uploaded.\n");
+            } else {
+                // echo "Upload failed";   
+            }
+
+
+
+            $file = fopen($uploadfile, "r");
+            $columns = NULL;
+            $dishesNotAdded = "";
+            $dishesNotAddedCount = 0;
+            $dishesAdded = "";
+            $dishesAddedCount = 0;
+
+            $i=1;
+            while (($data = fgetcsv($file, 1000, ",")) !== FALSE) {
+                if($i) {
+                    $i=0;
+                    continue;
+                }
+
+                $dishName = $data[1];
+                if($data[0]!="" and $data[0]!="Sr No." and strlen($dishName)>=2) {
+
+                    $query = "SELECT * FROM `dish`";
+                    if(mysqli_query($conn, $query)) {
+                        if(mysqli_affected_rows($conn)==0) {
+                            $query = "ALTER TABLE $tablename AUTO_INCREMENT = 1";
+                            mysqli_query($conn, $query);
+                        }
+                    }
+
+                    $query = "SELECT * FROM `dish` WHERE resId='$resid' AND dishName='$dishName'";
+                    $result = mysqli_query($conn, $query);
+                    if(mysqli_num_rows($result)!=0) {
+                        $dishesNotAddedCount++;
+                        $dishesNotAdded .= "$dishName, ";
+                    }
+                    else {
+                        $query = "INSERT INTO `dish` (resId, dishName, dishDesc, dishPrice, dishType, dishVeg)" . 
+                                "VALUES ('$resid', '$data[1]', '$data[2]', '$data[3]', '$data[4]', '$data[5]')";
+                        // $query = "SELECT * FROM `dish`";
+                        if(mysqli_query($conn, $query)) {
+                            $dishesAddedCount++;
+                            $dishesAdded .= "$dishName, ";
+                        }
+                        else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
+                    }
+                    
+
+                    
+                }
+                
+            }
+            $dishesNotAdded = $dishesNotAddedCount." dishes named <br>".substr($dishesNotAdded, 0, strlen($dishesNotAdded)-2);
+            $dishesNotAdded .= "<br>can't be added as they already exist in DB.";
+            $dishesAdded = $dishesAddedCount." dishes named <br>".substr($dishesAdded, 0, strlen($dishesAdded)-2);
+            $dishesAdded .= "<br>added successfully in DB.";
+            
+            messageAlert("success", $dishesAdded);
+            messageAlert("danger", $dishesNotAdded);
+
+            fclose($file);
+
+        }
+        else {
+            messageAlert("danger", "Please upload CSV file only.<br>You can Download Sample CSV file also.");
+        }
     }
 
 
@@ -475,8 +557,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div>
                         <p class="mb-2">Upload the CSV file containing all dish details.</p>
-                        <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                            <input class="btn btn-info" type="file" name="upload_file" value="Upload">
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data">
+                            <input class="btn btn-info" type="file" accept=".csv" name="uploadfile" value="Upload" required>
                             <button type="submit" name="addMulDishSubmit" class="btn btn-info">
                                     Upload&nbsp;&nbsp;<i class='fa fa-upload' aria-hidden='true'></i>                               
                             </button>
