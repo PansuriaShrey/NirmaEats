@@ -16,7 +16,6 @@
 <?php
 
     session_start();
-    // $_SESSION["resid"] = 1;
     $resid=$_SESSION["resid"];
 
     // Getting Name of RESTAURANT
@@ -195,6 +194,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         ";
     }
 
+
+
     if($addDishSubmit) {
         
         $resId = $GLOBALS["resid"];
@@ -204,74 +205,157 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $dishType = htmlspecialchars($_POST["dishType"]);
         $dishVeg = htmlspecialchars($_POST["Veg"]);
 
-        // code for storing image
-        $dishPicture = $_FILES["dishPicture"];
-        $fileDir = "./assets/images/";
-        $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"NirmaEats\" AND TABLE_NAME = \"dish\";";
-        $next_dish_id=mysqli_query($conn,$tempsql);
-        $next_dish_id=mysqli_fetch_assoc($next_dish_id)["AUTO_INCREMENT"];
-        $fileName = "dish"."$next_dish_id";
-
-        $getend = $_FILES['dishPicture']['name'];
-        $getend = explode(".",$getend);
-        $sz = count($getend);
-        $ext = $getend[$sz-1];
-
-        $fileName .= ".".$ext;
-
-        $uploadfile = $fileDir.$fileName;
-        if (move_uploaded_file($_FILES['dishPicture']['tmp_name'], $uploadfile)) {
-            // messageAlert("success", "File is valid, and was successfully uploaded.\n");
-        } else {
-            // echo "Upload failed";
-        }
-
-        // echo "$resId, $dishName, $dishDesc, $dishPrice, $dishType, $dishVeg";
-
-        $query = "INSERT INTO `dish` 
-        (`resId`, `dishName`, `dishPicture`, `dishDesc`, `dishPrice`, `dishType`, `dishVeg`) 
-        VALUES ('$resId', '$dishName', '$fileName', '$dishDesc', '$dishPrice', '$dishType', '$dishVeg');";
-
-        if(mysqli_query($conn, $query)) {
-            messageAlert("success", "1 Dish added Successfully.");
+        // checking if same dish exist in DB
+        $query = "SELECT * FROM `dish` WHERE resId='$resId' AND dishName='$dishName'";
+        $result = mysqli_query($conn, $query);
+        if(mysqli_num_rows($result)!=0) {
+            messageAlert("danger", "Dish named $dishName already exist in Database.<br>Please Enter different Name.");
         }
         else {
-            messageAlert("warning", "Error! Dish not added.");
+
+            // code for storing image
+            $dishPicture = $_FILES["dishPicture"];
+            $fileDir = "./assets/images/";
+            $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"NirmaEats\" AND TABLE_NAME = \"dish\";";
+            $next_dish_id=mysqli_query($conn,$tempsql);
+            $next_dish_id=mysqli_fetch_assoc($next_dish_id)["AUTO_INCREMENT"];
+            $fileName = "dish"."$next_dish_id";
+
+            $getend = $_FILES['dishPicture']['name'];
+            $getend = explode(".",$getend);
+            $sz = count($getend);
+            $ext = $getend[$sz-1];
+
+            $fileName .= ".".$ext;
+
+            $uploadfile = $fileDir.$fileName;
+            if (move_uploaded_file($_FILES['dishPicture']['tmp_name'], $uploadfile)) {
+                // messageAlert("success", "File is valid, and was successfully uploaded.\n");
+            } else {
+                // echo "Upload failed";
+            }
+
+            // echo "$resId, $dishName, $dishDesc, $dishPrice, $dishType, $dishVeg";
+
+            $query = "INSERT INTO `dish` 
+            (`resId`, `dishName`, `dishPicture`, `dishDesc`, `dishPrice`, `dishType`, `dishVeg`) 
+            VALUES ('$resId', '$dishName', '$fileName', '$dishDesc', '$dishPrice', '$dishType', '$dishVeg');";
+
+            if(mysqli_query($conn, $query)) {
+                messageAlert("success", "1 Dish added Successfully.");
+            }
+            else {
+                messageAlert("danger", "Error! Dish not added.");
+            }
         }
 
     }
+
+
     if($addMulDishSubmit) {
         messageAlert("success", "Multiple Dishes added Successfully.");
     }
+
+
     if($removeDishSubmit) {
         messageAlert("success", "1 Dish removed Successfully.");
     }
+
+
     if($editDishApply) {
         
         $collapsedEdit = true;
         $dishName = htmlspecialchars($_POST["dishNameUp"]);
-
+        
         $query = "SELECT * FROM `dish` WHERE resId=$resid AND dishName='$dishName'";
         $result = mysqli_query($conn, $query);
         if(mysqli_num_rows($result)>0) {
             while($row = mysqli_fetch_assoc($result)) {
+                $_SESSION["dishIdToUpdate"] = htmlspecialchars($row["DishId"]);
                 $dishNameUp = trim($row["dishName"]);
                 $dishDescUp = trim($row["dishDesc"]);
                 $dishPriceUp = trim($row["dishPrice"]);
                 $dishPictureUp = trim($row["dishPicture"]);
                 $dishTypeUp = trim($row["dishType"]);
                 $dishVegUp = str_replace(' ', '', trim($row["dishVeg"]));
-                // print_r($row);
+                
             }
 
         }
         else {
             messageAlert("danger", "Error! Dish named $dishName not found in your Database.");
         }
-
+        
     }
     if($editDishSubmit) {
-        messageAlert("success", "1 Dish updated Successfully.");
+
+        $dishId = $_SESSION["dishIdToUpdate"];
+        unset($_SESSION["dishIdToUpate"]);
+        $resId = $GLOBALS["resid"];
+        $dishName = htmlspecialchars($_POST["dishNameUp"]);
+        $dishDesc = htmlspecialchars($_POST["dishDescUp"]);
+        $dishPrice = htmlspecialchars($_POST["dishPriceUp"]);
+        $dishType = htmlspecialchars($_POST["dishTypeUp"]);
+        $dishVeg = htmlspecialchars($_POST["VegUp"]);
+
+        $dishPictureNew = "";
+        $query = "SELECT dishPicture FROM `dish` WHERE DishId='$dishId'";
+        $result = mysqli_query($conn, $query);
+        $dishPictureOld = mysqli_fetch_assoc($result)["dishPicture"];
+
+
+        if(!isset($_FILES['dishPictureUp']) || $_FILES['dishPictureUp']['error'] == UPLOAD_ERR_NO_FILE) {
+    
+        } else {
+            $dishPictureNew = $_FILES["dishPictureUp"];
+        }
+
+        // code for storing image
+        $fileName = "";
+        if(!empty($dishPictureNew)) {
+            
+            $fileDir = "./assets/images/";
+            // $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"NirmaEats\" AND TABLE_NAME = \"dish\";";
+            // $next_dish_id=mysqli_query($conn,$tempsql);
+            // $next_dish_id=mysqli_fetch_assoc($next_dish_id)["AUTO_INCREMENT"];
+            // $fileName = "dish"."$next_dish_id";
+            $dish_id = $dishId;
+            $fileName = "dish"."$dish_id";
+            
+
+            $getend = $_FILES['dishPictureUp']['name'];
+            $getend = explode(".",$getend);
+            $sz = count($getend);
+            $ext = $getend[$sz-1];
+
+            $fileName .= ".".$ext;
+
+            $uploadfile = $fileDir.$fileName;
+            if (move_uploaded_file($_FILES['dishPictureUp']['tmp_name'], $uploadfile)) {
+                // messageAlert("success", "File is valid, and was successfully uploaded.\n");
+            } else {
+                messageAlert("danger", "Error in uploading image.");
+            }
+        }
+        else {
+            $fileName = $dishPictureOld;
+        }
+
+        // $query = "INSERT INTO `dish` 
+        // (`resId`, `dishName`, `dishPicture`, `dishDesc`, `dishPrice`, `dishType`, `dishVeg`) 
+        // VALUES ('$resId', '$dishName', '$fileName', '$dishDesc', '$dishPrice', '$dishType', '$dishVeg');";
+        $query = "UPDATE `dish`
+        SET dishName='$dishName', dishPicture='$fileName', dishDesc='$dishDesc', dishPrice='$dishPrice',
+            dishType='$dishType', dishVeg='$dishVeg'
+        WHERE resId=$resId AND DishId=$dishId;
+        ";
+
+        if(mysqli_query($conn, $query)) {
+            messageAlert("success", "1 Dish updated Successfully.");
+        }
+        else {
+            messageAlert("danger", "Error! Dish not updated.");
+        }
     }
 }
 
@@ -290,6 +374,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- <br><br> -->
     <center>
     <div class="accordion" id="accordionExample" style="width: 75%">
+
         <div class="card">
             <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
@@ -302,7 +387,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body" style="overflow: auto">
-                <form method="post" action=""  enctype="multipart/form-data"> 
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data"> 
                     <table border='0' cellpadding="6">
                         <tr>
                             <td>Dish Name:</td>
@@ -400,9 +485,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="card">
             <div class="card-header" id="headingThree">
                 <h5 class="mb-0">
-                <button class="btn collapsed cardbtn text-wrap" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <button class="btn collapsed cardbtn text-wrap" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" disabled>
                 3. REMOVE DISH
                 &nbsp;<i class="fa fa-minus-square" aria-hidden="true"></i>
+                &nbsp;&nbsp;(not available right now)
                 </button>
                 </h5>
             </div>
@@ -426,7 +512,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div id="collapseFour" class="collapse <?php if($collapsedEdit) echo "show"; ?>" aria-labelledby="headingFour" data-parent="#accordionExample">
                 <div class="card-body" style="overflow: auto">
-                <form method="post" action=""> 
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data"> 
                     <table border='0' cellpadding="6">
                         <tr>
                             <td></td>
@@ -499,7 +585,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                             <button type="submit" name="editDishApply" class="btn btn-danger mr-3" style="background-color: brown">
                                 Apply                          
                             </button><br>
-                            <button type="submit" name="editDishSubmit" class="btn btn-danger" style="background-color: brown">
+                            <button type="submit" name="editDishSubmit" class="btn btn-danger" style="background-color: brown" <?php if(!$collapsedEdit) echo "disabled"; ?>>
                                 Update                          
                             </button>
                             </td>
