@@ -15,19 +15,10 @@
 
 
 <?php
-    session_start();
 
-    // if(isset($_SESSION["userid"]) && $_SESSION["login"]=="OK"){
-    //     $userid=$_SESSION["userid"];
-    // }
-    // else{
-    //     header("Location : index.php");
-    //     session_destroy();
-    // }
+    include("auth_session_user.php");
+    $userid=$_SESSION["userid"];
 
-    $_SESSION["userid"]=1;
-
-    $userid=1;
     // Getting Name of USER
     $sql="";
     $sql.="SELECT * FROM `user` WHERE `userId` = ";
@@ -73,16 +64,16 @@
                 </a>
                 </li>
                 <li class="nav-item ">
-                <a class="nav-link" href="#">Dashboard</a>
+                <a class="nav-link" href="user_login.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">My Profile</a>
+                <a class="nav-link" href="progile.php">My Profile</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">My Orders</a>
+                <a class="nav-link" href="myorder.php">My Orders</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Cart</a>
+                <a class="nav-link" href="cart.php">Cart</a>
                 </li>
                 <li class="nav-item active">
                 <a class="nav-link" href="logout.php">Log Out<span class="sr-only">(current)</span></a>
