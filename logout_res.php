@@ -58,7 +58,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="res_login.php">
                     <?php echo "$name" ?>
                 </a>
                 </li>
@@ -69,7 +69,7 @@
                 <a class="nav-link" href="res_profile.php">My Profile</a>
                 </li>
                 <li class="nav-item active">
-                <a class="nav-link" href="logout.php">Log Out<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="logout_res.php">Log Out<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>

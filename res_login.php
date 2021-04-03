@@ -140,10 +140,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                <a class="nav-link" href="#"><?php echo "$name"; ?></a>
+                <a class="nav-link" href="res_login.php"><?php echo "$name"; ?></a>
                 </li>
                 <li class="nav-item active">
-                <a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="res_login.php">Dashboard<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="res_profile.php">My Profile</a>
@@ -550,7 +550,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="mb-3">
                         <p class="mb-2">Download the CSV file and enter details in given format.</p>
                         <a href="assets/files/dish_list.csv" download>
-                            <button type="button" class="btn btn-info">
+                            <button type="button" class="btn btn-warning">
                                 Download &nbsp;&nbsp;<i class="fa fa-download" aria-hidden="true"></i>
                             </button>
                         </a>
@@ -558,8 +558,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div>
                         <p class="mb-2">Upload the CSV file containing all dish details.</p>
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data">
-                            <input class="btn btn-info" type="file" accept=".csv" name="uploadfile" value="Upload" required>
-                            <button type="submit" name="addMulDishSubmit" class="btn btn-info">
+                            <input class="btn btn-warning" type="file" accept=".csv" name="uploadfile" value="Upload" required>
+                            <button type="submit" name="addMulDishSubmit" class="btn btn-warning">
                                     Upload&nbsp;&nbsp;<i class='fa fa-upload' aria-hidden='true'></i>                               
                             </button>
                         </form>
