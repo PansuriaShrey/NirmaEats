@@ -174,6 +174,29 @@
             $temp=0;
             while($shrey = mysqli_fetch_assoc($alldishes)){
                 // print_r($shrey);
+                $dishid=$shrey["dishId"];
+                // print_r($dishid);
+
+                // dish review
+                $sqltemp="SELECT * FROM reviewDish WHERE dishId=$dishid";
+                $sqltemp=mysqli_query($conn,$sqltemp);
+                // print_r($temp);
+                if(mysqli_num_rows($sqltemp)==0){
+                    $totalStar=0;
+                    $totalReview=0;
+                    $percent=0;
+                }
+                else{
+                    $row=mysqli_fetch_assoc($sqltemp);
+                    // print_r($row);
+                    $totalStar=$row["totalStar"];
+                    $totalReview=$row["totalReview"];
+                    $percent=($totalStar/$totalReview);
+                    $percent*=20;
+                    $percent=(int)$percent;
+                    // print_r($percent);
+                }
+
                 $quantity=$shrey["Quantity"];
                 $dishname=$shrey["dishName"];
                 $dishpic=$shrey["dishPicture"];
@@ -193,7 +216,7 @@
                     <div class='col-md-3 col-sm-6 item text-dark'>
                         <div class='card item-card card-block'>
                         <img src='assets/images/$dishpic' class='img2' alt='Photo of sunset'>
-                        <table class='table text-center mt-1'>
+                        <table class='table text-center mt-1 mb-0'>
                             <thead class='thead-light'>
                                 <tr>
                                 <th scope='col' colspan='2' class='text-center font-weight-bold'>$dishname</th>
@@ -211,6 +234,15 @@
                                 <tr>
                                 <th scope='row' class='text-center'>Type</th>
                                 <td>$dishtype</td>
+                                </tr>
+                                <tr>
+                                <td colspan=2>
+                                    <div class=\"progress\">
+                                        <div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" style=\"width: $percent%\" aria-valuenow=\"$percent\" aria-valuemin=\"0\" aria-valuemax=\"100\">
+                                        <small class=\"justify-content-center d-flex position-absolute w-100 text-light\"> $percent% ($totalReview Reviews) </small>
+                                        </div>
+                                    </div>
+                                </td>
                                 </tr>
                             </tbody>
                         </table>
