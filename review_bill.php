@@ -206,37 +206,87 @@
                     $dishpic=$shrey["dishPicture"];
                     $dishprice=$shrey["dishPrice"];
                     $dishtype=$shrey["dishType"];
+                    // echo "
+                    //     <div class=\"row\">
+                    //         <label for=\"inputEmail3\" class=\"col-sm-6 col-form-label\">
+                    //             <div class='container mt-4 mb-4'>
+                    //                 <div class='row d-flex justify-content-center align-items-center'>
+                    //                     <div class='item text-dark'>
+                    //                     <div class='card item-card card-block'>
+                    //                     <img src='assets/images/$dishpic' class='imgbill' alt='Photo of sunset'>
+                    //                     <table class='table text-center mt-1'>
+                    //                         <thead class='thead-light'>
+                    //                             <tr>
+                    //                             <th scope='col' colspan='2' class='text-center font-weight-bold'>$dishname</th>
+                    //                             </tr>
+                    //                         </thead>
+                    //                         <tbody>
+                    //                             <tr>
+                    //                             <th scope='row' class='text-center'>Price</th>
+                    //                             <td>$dishprice</td>
+                    //                             </tr>
+                    //                             <tr>
+                    //                             <th scope='row' class='text-center'>Type</th>
+                    //                             <td>$dishtype</td>
+                    //                             </tr>
+                    //                         </tbody>
+                    //                     </table>
+                    //                     </div>
+                    //                     </div>
+                    //                 </div>
+                    //             </div>
+                    //         </label>
+                    //         <div class=\"col-sm-5 d-flex align-items-center \"><div class='w-100'>
+                    //                 <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios$i\" id=\"gridRadios1\" value=\"1\" checked>
+                    //                 <label class=\"form-check-label mr-5\" for=\"gridRadios1\">
+                    //                 1
+                    //                 </label>
+                    //                 <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios$i\" id=\"gridRadios2\" value=\"2\">
+                    //                 <label class=\"form-check-label mr-5\" for=\"gridRadios2\">
+                    //                 2
+                    //                 </label>
+                    //                 <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios$i\" id=\"gridRadios3\" value=\"3\">
+                    //                 <label class=\"form-check-label mr-5\" for=\"gridRadios3\">
+                    //                 3
+                    //                 </label>
+                    //                 <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios$i\" id=\"gridRadios4\" value=\"4\">
+                    //                 <label class=\"form-check-label mr-5\" for=\"gridRadios4\">
+                    //                 4
+                    //                 </label>
+                    //                 <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios$i\" id=\"gridRadios5\" value=\"5\">
+                    //                 <label class=\"form-check-label mr-5\" for=\"gridRadios5\">
+                    //                 5
+                    //                 </label>
+                    //         </div></div>
+                    //     </div>
+                    // ";
+
                     echo "
-                        <div class=\"row\">
-                            <label for=\"inputEmail3\" class=\"col-sm-6 col-form-label\">
-                                <div class='container mt-4 mb-4'>
-                                    <div class='row d-flex justify-content-center align-items-center'>
-                                        <div class='item text-dark'>
-                                        <div class='card item-card card-block'>
-                                        <img src='assets/images/$dishpic' class='img2' alt='Photo of sunset'>
-                                        <table class='table text-center mt-1'>
-                                            <thead class='thead-light'>
-                                                <tr>
-                                                <th scope='col' colspan='2' class='text-center font-weight-bold'>$dishname</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                <th scope='row' class='text-center'>Price</th>
-                                                <td>$dishprice</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope='row' class='text-center'>Type</th>
-                                                <td>$dishtype</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        </div>
-                                        </div>
+                        <div class='container mt-4 mb-4'>
+                            <div class='row d-flex justify-content-center align-items-center'>
+                                <div class='col-md-3 col-sm-6 item text-dark'>
+                                    <div class='card item-card card-block'>
+                                    <img src='assets/images/$dishpic' class='img2' alt='Photo of sunset'>
+                                    <table class='table text-center mt-1 table-responsive d-flex justify-content-center align-items-center'>
+                                        <thead class='thead-light'>
+                                            <tr>
+                                            <th scope='col' colspan='2' class='text-center font-weight-bold'>$dishname</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            <th scope='row' class='text-center'>Price</th>
+                                            <td>$dishprice</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope='row' class='text-center'>Type</th>
+                                            <td>$dishtype</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     </div>
                                 </div>
-                            </label>
-                            <div class=\"col-sm-5 d-flex align-items-center \"><div class='w-100'>
+                                <div class='col-md-6 col-sm-6 item text-light '>
                                     <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios$i\" id=\"gridRadios1\" value=\"1\" checked>
                                     <label class=\"form-check-label mr-5\" for=\"gridRadios1\">
                                     1
@@ -257,7 +307,8 @@
                                     <label class=\"form-check-label mr-5\" for=\"gridRadios5\">
                                     5
                                     </label>
-                            </div></div>
+                                </div>
+                            </div>
                         </div>
                     ";
                 }
