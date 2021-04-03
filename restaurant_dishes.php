@@ -186,6 +186,26 @@
             $dishdesc=$shrey["dishDesc"];
             $v=$shrey["dishVeg"];
             $dishid=$shrey["DishId"];
+
+            $sqltemp="SELECT * FROM reviewDish WHERE dishId=$dishid";
+            $sqltemp=mysqli_query($conn,$sqltemp);
+            // print_r($temp);
+            if(mysqli_num_rows($sqltemp)==0){
+                $totalStar=0;
+                $totalReview=0;
+                $percent=0;
+            }
+            else{
+                $row=mysqli_fetch_assoc($sqltemp);
+                // print_r($row);
+                $totalStar=$row["totalStar"];
+                $totalReview=$row["totalReview"];
+                $percent=($totalStar/$totalReview);
+                $percent*=20;
+                $percent=(int)$percent;
+                // print_r($percent);
+            }
+
             $temp++;
             if($temp%4==1){
                 echo "
@@ -195,7 +215,7 @@
                         <div class='row d-flex justify-content-center align-items-center'>
                 ";
             }
-            if($v=="VEG"){
+            if($v=="Veg"){
                 echo "
                 <div class='col-md-3 col-sm-6 item text-dark'>
                     <div class='card item-card card-block'>
@@ -212,6 +232,15 @@
                                 <td>$dishprice</td>
                                 </tr>
                                 <tr>
+                                <tr>
+                                <td colspan=2>
+                                    <div class=\"progress\">
+                                        <div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" style=\"width: $percent%\" aria-valuenow=\"$percent\" aria-valuemin=\"0\" aria-valuemax=\"100\">
+                                        <small class=\"justify-content-center d-flex position-absolute w-100 text-light\"> $percent% ($totalReview Reviews) </small>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
                             </tbody>
                     </table>
                     <form action='./restaurant_dishes.php?resid=$resid&dishid=$dishid' method='POST'>
@@ -238,7 +267,14 @@
                                 <th scope='row' class='text-center'>Price</th>
                                 <td>$dishprice</td>
                                 </tr>
-                                <tr>
+                                <td colspan=2>
+                                    <div class=\"progress\">
+                                        <div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" style=\"width: $percent%\" aria-valuenow=\"$percent\" aria-valuemin=\"0\" aria-valuemax=\"100\">
+                                        <small class=\"justify-content-center d-flex position-absolute w-100 text-light\"> $percent% ($totalReview Reviews) </small>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
                             </tbody>
                     </table>
                     <form action='./restaurant_dishes.php?resid=$resid&dishid=$dishid' method='POST'>
