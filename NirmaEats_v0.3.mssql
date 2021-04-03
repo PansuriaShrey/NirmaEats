@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 03, 2021 at 08:10 AM
+-- Generation Time: Apr 03, 2021 at 08:16 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -24,6 +24,160 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bill`
+--
+
+CREATE TABLE `bill` (
+  `billId` int(10) NOT NULL,
+  `userId` int(10) NOT NULL,
+  `resId` int(10) NOT NULL,
+  `totalPay` int(10) NOT NULL,
+  `Date` date NOT NULL,
+  `review` int(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bill`
+--
+
+INSERT INTO `bill` (`billId`, `userId`, `resId`, `totalPay`, `Date`, `review`) VALUES
+(6, 1, 1, 80, '2021-04-01', 0),
+(7, 1, 2, 750, '2021-04-01', 0),
+(8, 2, 1, 340, '2021-04-01', 0),
+(9, 3, 2, 250, '2021-04-01', 0),
+(10, 3, 1, 250, '2021-04-02', 0),
+(11, 1, 2, 1250, '2021-04-02', 0),
+(12, 3, 1, 139, '2021-04-02', 0),
+(13, 1, 1, 118, '2021-04-02', 0),
+(14, 1, 1, 160, '2021-04-02', 0),
+(15, 2, 7, 45, '2021-04-03', 0),
+(16, 2, 2, 250, '2021-04-03', 0),
+(17, 1, 7, 15, '2021-04-03', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `billDetails`
+--
+
+CREATE TABLE `billDetails` (
+  `billId` int(10) NOT NULL,
+  `dishId` int(10) NOT NULL,
+  `Quantity` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `billDetails`
+--
+
+INSERT INTO `billDetails` (`billId`, `dishId`, `Quantity`) VALUES
+(6, 2, 1),
+(7, 3, 3),
+(8, 1, 2),
+(9, 3, 1),
+(10, 1, 1),
+(10, 2, 1),
+(11, 3, 5),
+(12, 2, 1),
+(12, 4, 1),
+(13, 4, 2),
+(14, 2, 2),
+(15, 5, 3),
+(16, 3, 1),
+(17, 5, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cartId` int(10) NOT NULL,
+  `userId` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cartId`, `userId`) VALUES
+(21, 2),
+(20, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cartDetail`
+--
+
+CREATE TABLE `cartDetail` (
+  `cartId` int(10) NOT NULL,
+  `userId` int(10) NOT NULL,
+  `dishId` int(10) NOT NULL,
+  `resId` int(10) NOT NULL,
+  `Quantity` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dish`
+--
+
+CREATE TABLE `dish` (
+  `DishId` int(6) NOT NULL,
+  `resId` int(6) NOT NULL,
+  `dishName` varchar(255) NOT NULL,
+  `dishPicture` varchar(255) NOT NULL,
+  `dishDesc` varchar(255) NOT NULL,
+  `dishPrice` int(6) NOT NULL,
+  `dishType` varchar(255) NOT NULL,
+  `dishVeg` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dish`
+--
+
+INSERT INTO `dish` (`DishId`, `resId`, `dishName`, `dishPicture`, `dishDesc`, `dishPrice`, `dishType`, `dishVeg`) VALUES
+(1, 1, 'Shahi Paneer', 'dish1.jpeg', 'Shahi Paneer is too OP', 170, 'Vegetable', 'Veg'),
+(2, 1, 'Cheese Masala Dosa', 'dish2.jpeg', 'Dosai is OP', 80, 'Dosa', 'Veg'),
+(3, 2, 'Chiken Masala', 'dish3.jpeg', 'Chiken Chiken', 250, 'Vegetable', 'NonVeg'),
+(4, 1, 'Black Forest', 'dish4.jpeg', 'Everyones favourite', 59, 'Dessert', 'Veg'),
+(5, 7, 'Vadapav', 'dish5.jpeg', 'A crisped layer of Vada and Pav', 15, 'Snack', 'Veg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurant`
+--
+
+CREATE TABLE `restaurant` (
+  `resId` int(10) NOT NULL,
+  `resName` varchar(50) NOT NULL,
+  `resEmailId` varchar(255) NOT NULL,
+  `resAddress` varchar(255) NOT NULL,
+  `resType` varchar(255) NOT NULL,
+  `resPicture` varchar(255) NOT NULL,
+  `resOpeningTime` time NOT NULL,
+  `resClosingTime` time NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `restaurant`
+--
+
+INSERT INTO `restaurant` (`resId`, `resName`, `resEmailId`, `resAddress`, `resType`, `resPicture`, `resOpeningTime`, `resClosingTime`, `password`) VALUES
+(1, 'Shivam\'s Restaurant', 'shivamajudia@gmail.com', 'Beside Nirma University', '', 'res1.jpeg', '11:36:57', '14:49:57', 'HelloNirma'),
+(2, 'Aakash Da Dhaba', 'aakashshah2451@gmail.com', 'Near Gota, Ahmedabad', 'Supper', 'res2.jpeg', '10:00:30', '20:00:00', ''),
+(3, 'Parth Cafe', 'parthshah1999@yahoo.com', 'Near Vaishnodevi Circle, Ahmedabad', '', 'res3.jpeg', '10:00:00', '18:00:00', ''),
+(7, 'TGB', '123@gmail.com', 'Gota', 'Beverage/', 'res7.jpeg', '12:15:00', '04:15:00', 'Shivam@1');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `reviewDish`
 --
 
@@ -33,19 +187,88 @@ CREATE TABLE `reviewDish` (
   `totalReview` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `reviewDish`
+-- Table structure for table `reviewRes`
 --
 
-INSERT INTO `reviewDish` (`dishId`, `totalStar`, `totalReview`) VALUES
-(1, 4, 1),
-(2, 7, 2),
-(3, 12, 3),
-(4, 4, 1);
+CREATE TABLE `reviewRes` (
+  `resId` int(6) NOT NULL,
+  `totalStar` int(20) NOT NULL,
+  `totalReview` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `userId` int(6) NOT NULL,
+  `user_name` varchar(20) DEFAULT NULL,
+  `emailId` varchar(50) DEFAULT NULL,
+  `password` varchar(40) DEFAULT NULL,
+  `mobileNumber` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`userId`, `user_name`, `emailId`, `password`, `mobileNumber`) VALUES
+(1, 'Shrey Pansuria', '18bce224@nirmauni.ac.in', 'HelloNirma', '7990357026'),
+(2, 'Parth Shah', '18bce219@nirmauni.ac.in', 'HelloDvijesh', '1234567890'),
+(3, 'Shivam Ajudia', '18bce223@nirmauni.ac.in', 'Shivam@1', '7990357026');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `bill`
+--
+ALTER TABLE `bill`
+  ADD PRIMARY KEY (`billId`),
+  ADD KEY `test3` (`userId`),
+  ADD KEY `test4` (`resId`);
+
+--
+-- Indexes for table `billDetails`
+--
+ALTER TABLE `billDetails`
+  ADD PRIMARY KEY (`billId`,`dishId`),
+  ADD KEY `test2` (`dishId`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cartId`),
+  ADD KEY `test5` (`userId`);
+
+--
+-- Indexes for table `cartDetail`
+--
+ALTER TABLE `cartDetail`
+  ADD PRIMARY KEY (`cartId`,`userId`,`dishId`,`resId`),
+  ADD KEY `test7` (`dishId`),
+  ADD KEY `test8` (`resId`),
+  ADD KEY `test9` (`userId`);
+
+--
+-- Indexes for table `dish`
+--
+ALTER TABLE `dish`
+  ADD PRIMARY KEY (`DishId`),
+  ADD KEY `test10` (`resId`);
+
+--
+-- Indexes for table `restaurant`
+--
+ALTER TABLE `restaurant`
+  ADD PRIMARY KEY (`resId`);
 
 --
 -- Indexes for table `reviewDish`
@@ -54,8 +277,44 @@ ALTER TABLE `reviewDish`
   ADD PRIMARY KEY (`dishId`);
 
 --
+-- Indexes for table `reviewRes`
+--
+ALTER TABLE `reviewRes`
+  ADD PRIMARY KEY (`resId`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`userId`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `bill`
+--
+ALTER TABLE `bill`
+  MODIFY `billId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cartId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `dish`
+--
+ALTER TABLE `dish`
+  MODIFY `DishId` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `restaurant`
+--
+ALTER TABLE `restaurant`
+  MODIFY `resId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `reviewDish`
@@ -64,8 +323,55 @@ ALTER TABLE `reviewDish`
   MODIFY `dishId` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `reviewRes`
+--
+ALTER TABLE `reviewRes`
+  MODIFY `resId` int(6) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `userId` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bill`
+--
+ALTER TABLE `bill`
+  ADD CONSTRAINT `test3` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`),
+  ADD CONSTRAINT `test4` FOREIGN KEY (`resId`) REFERENCES `restaurant` (`resId`);
+
+--
+-- Constraints for table `billDetails`
+--
+ALTER TABLE `billDetails`
+  ADD CONSTRAINT `test1` FOREIGN KEY (`billId`) REFERENCES `bill` (`billId`),
+  ADD CONSTRAINT `test2` FOREIGN KEY (`dishId`) REFERENCES `dish` (`DishId`);
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `test5` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`);
+
+--
+-- Constraints for table `cartDetail`
+--
+ALTER TABLE `cartDetail`
+  ADD CONSTRAINT `test6` FOREIGN KEY (`cartId`) REFERENCES `cart` (`cartId`),
+  ADD CONSTRAINT `test7` FOREIGN KEY (`dishId`) REFERENCES `dish` (`DishId`),
+  ADD CONSTRAINT `test8` FOREIGN KEY (`resId`) REFERENCES `restaurant` (`resId`),
+  ADD CONSTRAINT `test9` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`);
+
+--
+-- Constraints for table `dish`
+--
+ALTER TABLE `dish`
+  ADD CONSTRAINT `test10` FOREIGN KEY (`resId`) REFERENCES `restaurant` (`resId`);
 
 --
 -- Constraints for table `reviewDish`
