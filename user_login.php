@@ -74,7 +74,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="user_login.php">
             <img src="assets/images/logo.png" alt="Logo" style="max-height:60px;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,7 +83,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="user_login.php">
                     <?php echo "Hello, $name" ?>
                 </a>
                 </li>

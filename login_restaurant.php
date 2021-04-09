@@ -54,7 +54,9 @@
 ?>
 <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
     <form class="form" method="post" name="loginRestaurantForm" novalidate ng-submit="loginRestaurantForm.$valid &&sendForm()" autocomplete="off">
-        <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
+        <a href="index.php">
+            <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
+        </a>
         <hr>
         <hr>
         <h1 class="login-title">Restaurant Login</h1>

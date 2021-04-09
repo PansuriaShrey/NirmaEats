@@ -54,7 +54,10 @@
 ?>
     <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
     <form class="form" method="post" name="loginForm" novalidate ng-submit="sendForm()" autocomplete="off">
+        <a href="index.php">
         <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
+        </a>
+        
         <hr>
         <hr>
         <h1 class="login-title">User Login</h1>
