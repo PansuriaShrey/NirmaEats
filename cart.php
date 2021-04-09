@@ -59,14 +59,17 @@
 ?>
 
 <?php
-    $dishidgot=$_GET["dishid"];
-    // echo "<cente r class='text-light'>".$dishid."</center><br>";
-    if(isset($_POST["remove"])){
-        $tempsql="DELETE FROM `cartDetail` WHERE dishID=$dishidgot";
-        mysqli_query($conn,$tempsql);
-        echo "<script>alert('Dish is removed from Cart')</script>";
-        echo "<script>window.location = './cart.php'</script>";
-        exit;
+
+    if(isset($_GET["dishid"])) {
+        $dishidgot=$_GET["dishid"];
+        // echo "<cente r class='text-light'>".$dishid."</center><br>";
+        if(isset($_POST["remove"])){
+            $tempsql="DELETE FROM `cartDetail` WHERE dishID=$dishidgot";
+            mysqli_query($conn,$tempsql);
+            echo "<script>alert('Dish is removed from Cart')</script>";
+            echo "<script>window.location = './cart.php'</script>";
+            exit;
+        }
     }
 ?>
 

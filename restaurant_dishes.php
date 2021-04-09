@@ -169,7 +169,7 @@
         <div class='container mb-3 mt-3 text-light'>
             <div class='row'>
                 <div class='col-sm text-center'>
-                    Restaurant : <?php echo $resname; ?>
+                    <h3 class="mb-0">Restaurant : <?php echo $resname; ?></h3>
                 </div>
             </div>
         </div>
@@ -235,8 +235,8 @@
                                 <tr>
                                 <td colspan=2>
                                     <div class=\"progress\">
-                                        <div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" style=\"width: $percent%\" aria-valuenow=\"$percent\" aria-valuemin=\"0\" aria-valuemax=\"100\">
-                                        <small class=\"justify-content-center d-flex position-absolute w-100 text-light\"> $percent% ($totalReview Reviews) </small>
+                                        <div class=\"progress-bar progress-bar-striped progress-bar-animated bg-info\" role=\"progressbar\" style=\"width: $percent%\" aria-valuenow=\"$percent\" aria-valuemin=\"0\" aria-valuemax=\"100\">
+                                        <small class=\"justify-content-center d-flex position-absolute w-100 text-dark display-6\"> $percent% ($totalReview Reviews) </small>
                                         </div>
                                     </div>
                                 </td>
