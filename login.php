@@ -43,7 +43,7 @@
             $_SESSION['userid'] = $userid;
             //Redirect to user dashboard page
             
-            header("Location: login.php");
+            header("Location: registration.php");
         } else {
             echo "<div class='form'>
                   <h3>Incorrect Username/password.</h3><br/>
@@ -53,7 +53,7 @@
     } else {
 ?>
     <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
-    <form class="form" method="post" name="loginForm" novalidate ng-submit="sendForm()" autocomplete="off">
+    <form class="form" action = "" method="post" name="loginForm" novalidate ng-submit="sendForm()" autocomplete="off">
         <a href="index.php">
         <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
         </a>
