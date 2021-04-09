@@ -38,11 +38,11 @@
             $resid=mysqli_fetch_assoc($result)['resId'];
             $_SESSION["resid"] = $resid;
             // Redirect to user dashboard page
-            //echo "<div class='form'>
-                  //<h3>You have been directed to the required page</h3><br/>
-                 // <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
-                  //</div>";
-            header("Location: registration_restuarant.php");
+            echo "<div class='form'>
+                  <h3>You have been directed to the required page</h3><br/>
+                  <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
+                  </div>";
+            header("Location: res_login.php");
         } else {
             echo  "<div class = 'form'>
                   <h3>Incorrect Username/password.</h3><br/>
@@ -53,8 +53,10 @@
     } else {
 ?>
 <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
-    <form class="form" action = "" method="post" name="loginRestaurantForm" novalidate ng-submit="loginRestaurantForm.$valid &&sendForm()" autocomplete="off">
-        <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
+    <form class="form" method="post" name="loginRestaurantForm" novalidate ng-submit="loginRestaurantForm.$valid &&sendForm()" autocomplete="off">
+        <a href="index.php">
+            <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
+        </a>
         <hr>
         <hr>
         <h1 class="login-title">Restaurant Login</h1>

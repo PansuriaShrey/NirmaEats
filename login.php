@@ -25,7 +25,6 @@
     session_start();
     // When form submitted, check and create user session.
     if (isset($_POST['submit'])) {
-        echo "Form Submitted";
         $email = stripslashes($_REQUEST['email']);    // removes backslashes
         $email = mysqli_real_escape_string($con, $email);
         $password = stripslashes($_REQUEST['password']);
@@ -35,15 +34,16 @@
                      AND password ='$password'";
         $result = mysqli_query($con, $query);
         $rows = mysqli_num_rows($result);
-        if ($rows == 1) {
+        if ($rows >= 1) {
             echo "<div class='form'>
-                  <h3>Logged in successfully</h3><br/>
+                   <h3>You have been directed to the required page</h3><br/>
                   <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
-                  </div>";
-                $userid=mysqli_fetch_assoc($result)['userId'];
+                   </div>";
+            $userid=mysqli_fetch_assoc($result)['userId'];
             $_SESSION['userid'] = $userid;
             //Redirect to user dashboard page
-            header("Location: registration.php");
+            
+            header("Location: login.php");
         } else {
             echo "<div class='form'>
                   <h3>Incorrect Username/password.</h3><br/>
@@ -52,9 +52,12 @@
         }
     } else {
 ?>
-<div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
-    <form class="form" action="" method="post" name="loginForm" novalidate ng-submit="sendForm()" autocomplete="off">
+    <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
+    <form class="form" method="post" name="loginForm" novalidate ng-submit="sendForm()" autocomplete="off">
+        <a href="index.php">
         <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
+        </a>
+        
         <hr>
         <hr>
         <h1 class="login-title">User Login</h1>
@@ -64,7 +67,7 @@
 
         <input type="password" class="login-input" name="password" placeholder="Password" required /><br>
 
-        <input type="submit" value="Login" name="submit"  ng-disabled="loginForm.$pristine || !loginForm.email.$valid" class="login-button"/>
+        <input type="submit" value="Login" name="submit"  class="login-button"/>
         <p class="link">Don't have an account? <a href="registration.php">Register Now</a></p>
   </form>
 </div>

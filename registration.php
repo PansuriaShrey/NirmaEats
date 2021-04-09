@@ -60,8 +60,9 @@
 <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
     <form class="form" action="" method="post" name="personForm" novalidate ng-submit="personForm.$valid &&sendForm()" 
     autocomplete="off">
-        <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
-
+        <a href="index.php">
+            <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
+        </a>
         <hr>
         <hr>
 
