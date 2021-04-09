@@ -80,7 +80,7 @@
 
 
                 <input type="password" class="login-input" name="password" ng-model="password" 
-                ng-pattern="/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}$/" placeholder="Password" required /><br>
+                ng-pattern="/^(((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])))(?=.{8,})/" placeholder="Password" required /><br>
                 <span class="error" ng-show="personForm.password.$error.required">*</span>
                 <span class="error" ng-show="personForm.password.$dirty&&personForm.password.$error.pattern">Please Enter a strong Password</span><br>
 

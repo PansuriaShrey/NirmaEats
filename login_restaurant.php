@@ -5,6 +5,18 @@
     <title>Login</title>
     <link type = 'text/css' rel="stylesheet" href="assets/styles/login.css"/>
     <link type = 'text/css' rel="stylesheet" href="assets/styles/index.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module ('ngpatternApp', []);
+        app.controller('ngpatternCtrl', function ($scope) {
+            $scope.sendForm = function () {
+            $scope.msg = "Form Validated";
+        };
+
+        });
+
+    </script>
 </head>
 <body>
 <?php
@@ -40,16 +52,23 @@
         }
     } else {
 ?>
-    <form class="form" method="post" name="login">
+<div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
+    <form class="form" method="post" name="loginRestaurantForm" novalidate ng-submit="loginRestaurantForm.$valid &&sendForm()" autocomplete="off">
         <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
         <hr>
         <hr>
         <h1 class="login-title">Restaurant Login</h1>
-        <input type="text" class="login-input" name="email" placeholder="email" autofocus="true"/>
-        <input type="text" class="login-input" name="password" placeholder="Password"/>
-        <input type="submit" value="Login" name="submit" class="login-button"/>
+        <input type="text" class="login-input" name="email"  ng-model="email" ng-pattern="/^[a-z|0-9|\.]{1,}(@)[a-z|0-9|\.]{1,}(\.){1,}[a-z|0-9|\.]{1,}$/" placeholder="Email Address" required /><br>
+        <span class="error" ng-show="loginRestaurantForm.email.$error.required">*</span>
+        <span class="error" ng-show="loginRestaurantForm.email.$dirty&&loginRestaurantForm.email.$error.pattern">Enter Correct Email</span><br>
+
+        <input type="password" class="login-input" name="password" placeholder="Password" required /><br>
+
+        <input type="submit" value="Login" name="submit" ng-disabled="loginRestaurantForm.$pristine || !loginRestaurantForm.email.$valid" class="login-button"/>
+
         <p class="link">Don't have an account? <a href="registration_restuarant.php">Register Now</a></p>
   </form>
+</div>
 <?php
     }
 ?>

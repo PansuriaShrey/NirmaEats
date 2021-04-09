@@ -17,13 +17,6 @@
 
         });
 
-        function atLeastOneCheckboxIsChecked()
-        {
-            const checkboxes = Array.from(document.querySelectorAll(".checkbox"));
-            return checkboxes.reduce((acc, curr) => acc || curr.checked, false);
-        }
-
-    }
 
     </script>
 
@@ -106,18 +99,17 @@
     
     } else {
 ?>
-    <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
-    <form class="form" action="" method="post" name="restaurantForm" novalidate ng-submit="sendForm()" enctype="multipart/form-data"
-    autocomplete="off">
+<div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
+
+    <form class="form" action="" method="post" name="restaurantForm" ng-submit="restaurantForm.$valid && sendForm()" enctype="multipart/form-data" autocomplete="off">
         <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
         <hr>
         <hr>
             <h1 class="login-title">Restaurant Registration</h1>
 
-                <input type="text" class="login-input" name="resName" ng-model="resName" 
-                ng-pattern="/^([a-z]|[A-Z]){2,}$/" placeholder="Restaurant Name" required /><br>
-                <span class="error" ng-show="restaurantForm.resName.$error.required">*</span>
-                <span class="error" ng-show="restaurantForm.resName.$dirty&&restaurantForm.resName.$error.pattern">Restaurant Name Should be atleast two letters</span><br>
+            <input type="text" class="login-input" name="resName" ng-model="resName" ng-pattern="/^([a-z]|[A-Z]){2,}$/" placeholder="Restaurant Name" required /><br>
+            <span class="error" ng-show="restaurantForm.resName.$error.required">*</span>
+            <span class="error" ng-show="restaurantForm.resName.$dirty && restaurantForm.resName.$error.pattern">Restaurant Name Should be atleast two letters</span><br>
 
                 <input type="text" class="login-input" name="resEmailId" ng-model="resEmailId" 
                 ng-pattern="/^[a-z|0-9|\.]{1,}(@)[a-z|0-9|\.]{1,}(\.){1,}[a-z|0-9|\.]{1,}$/" placeholder="Email Address" required /><br>
@@ -194,7 +186,7 @@
                     </tr>
                  </table>
                 </fieldset>  
-                <span id = "cb" class="error">* <?php echo $mobileErr;?></span><br></center>
+                <span class="error" ng-show="">*</span><br>
 
                 <fieldset class="field_set">
                 <span>Upload a Picture</span>
@@ -214,7 +206,7 @@
                 <span class="error">* <?php echo $mobileErr;?></span><br></center>   
 
                 <input type="password" class="login-input" name="password" ng-model="password" 
-                ng-pattern="/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}$/" placeholder="Password" /required><br>
+                ng-pattern="/^(((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])))(?=.{8,})/" placeholder="Password" /required><br>
                 <span class="error" ng-show="restaurantForm.password.$error.required">*</span>
                 <span class="error" ng-show="restaurantForm.password.$dirty&&restaurantForm.password.$error.pattern">Please Enter a strong Password</span><br>
 
@@ -223,9 +215,7 @@
                 <span class="error" ng-show="password != passwordcon">Passwords Dont match</span><br>
         
                 <input type="submit" name="submit" ng-disabled="restaurantForm.$pristine || !restaurantForm.resName.$valid || !restaurantForm.resEmailId.$valid || !restaurantForm.resAddress.$valid || !restaurantForm.password.$valid || !restaurantForm.passwordcon.$valid" value="Register" class="login-button">
-                <span class="error" ng-show="restaurantForm.$pristine">Pristine</span>
                 <p class="link">Already have an account? <a href="login_restaurant.php">Login here</a></p>
-
 
     </form>
 </div>
