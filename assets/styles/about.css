@@ -1,6 +1,7 @@
 
 body {
   /* font-family: "Open Sans", sans-serif; */
+  font-family: 'Noto Serif', serif;
   color: yellow;
 }
 
@@ -15,7 +16,8 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Raleway", sans-serif;
+  /* font-family: "Raleway", sans-serif; */
+  font-family: 'Noto Serif', serif;
 }
 
 /* navbar */
@@ -25,7 +27,7 @@ h1, h2, h3, h4, h5, h6 {
 } */
 
 .navbar ul {
-  margin: 60pxs;
+  /* margin: 60pxs; */
   padding: 0;
   display: flex;
   list-style: none;
@@ -34,7 +36,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar li {
   display: inline-block;
-  margin-left: 1vh;
+  /* margin-left: 1vh; */
   position: relative;
   overflow: hidden;
 }
@@ -43,10 +45,12 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0 10px 30px;
-  font-family: "Poppins", sans-serif;
-  font-size: 15px;
-  font-weight: 500;
+  /* padding: 10px 0 10px 30px; */
+  /* font-family: "Poppins", sans-serif; */
+  font-family: 'Noto Serif', serif;
+  /* font-size: 15px; */
+  font-size: 1.25rem;
+  font-weight: 400;
   color: #37423b;
   white-space: nowrap;
   transition: 0.3s;
@@ -60,6 +64,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar a:hover, .navbar .active, .navbar li:hover > a {
   color: brown;
+}
+.navbar-nav {
+  font-size: 1.15rem;
+  font-family: 'Noto Serif', serif;
+}
+.nav-link {
+  display: block;
+  padding: .5rem 1rem;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
 }
 
 

@@ -5,7 +5,8 @@ body {
     margin: 50px auto;
     width: 300px;
     color: #666;
-    font-family: arial;
+    /* font-family: arial; */
+    font-family: 'Noto Serif', serif;
     padding: 30px 25px;
     background: white;
     opacity: 1;
@@ -38,7 +39,8 @@ table, th, td {
 .login-area {
 
     font-weight: 100;
-    font-family: arial;
+    /* font-family: arial; */
+    font-family: 'Noto Serif', serif;
     font-size: 15px;
     border: 1px solid #ccc;
     padding: 10px;
@@ -48,7 +50,8 @@ table, th, td {
 }
 .login-area:focus {
     font-weight: 300;
-    font-family: arial;
+    /* font-family: arial; */
+    font-family: 'Noto Serif', serif;
     border-color: brown;
     outline: none;
 }

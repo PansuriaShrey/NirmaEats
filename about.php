@@ -22,9 +22,10 @@
     <link href="assets/remixicon/remixicon.css" rel="stylesheet">
     <link href="assets/swiper/swiper-bundle.min.css" rel="stylesheet">
     
-    <link href="assets/styles/about.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="assets/styles/styles.css">
     <link rel="stylesheet" href="assets/styles/index.css">
+    <link href="assets/styles/about.css" rel="stylesheet">
 
     <title>About Us</title>
 </head>
