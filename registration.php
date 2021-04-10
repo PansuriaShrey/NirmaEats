@@ -32,8 +32,8 @@
         $email    = mysqli_real_escape_string($con, $email);
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
+        $passwordhash = password_hash($password, PASSWORD_DEFAULT);
         $mobilenumber = stripslashes($_REQUEST['mobilenumber']);
-        //escapes special characters in a string
         $mobilenumber = mysqli_real_escape_string($con, $mobilenumber);
         
         $sql="SELECT * FROM `user` WHERE `emailId` LIKE '$email'";
@@ -48,8 +48,8 @@
         
 
         $query    = "INSERT INTO user (user_name, emailId, password, mobileNumber )"
-        ."VALUES ('$username','$email','$password','$mobilenumber');";
-        $result   = mysqli_query($con, $query);
+        ."VALUES ('$username','$email','$passwordhash','$mobilenumber');";
+        $result = mysqli_query($con, $query);
         if ($result) {
             echo "<div class='form'>
                   <h3>You are registered successfully.</h3><br/>
@@ -77,7 +77,7 @@
             <h1 class="login-title">User Registration</h1>
 
                 <input type="text" class="login-input" name="username" ng-model="username" 
-                ng-pattern="/^[a-zA-Z\s]+$/" placeholder="Username" required /><br>
+                ng-pattern="/^[a-zA-Z\s]{2,}$/" placeholder="Username" required /><br>
                 <span class="error" ng-show="personForm.username.$error.required">*</span>
                 <span class="error" ng-show="personForm.username.$dirty&&personForm.username.$error.pattern">Name Should be atleast two letters</span><br>
         
@@ -91,12 +91,18 @@
                 <input type="password" class="login-input" name="password" ng-model="password" 
                 ng-pattern="/^(((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])))(?=.{8,})/" placeholder="Password" required /><br>
                 <span class="error" ng-show="personForm.password.$error.required">*</span>
-                <span class="error" ng-show="personForm.password.$dirty&&personForm.password.$error.pattern">Please Enter a strong Password</span><br>
+                <span class="error" ng-show="personForm.password.$dirty&&personForm.password.$error.pattern">Please Enter a strong Password.
+                <br>1. Minimum length should be 8 characters.
+                <br>2. Should contain atleast 1 lowercase letter. (a-z)
+                <br>3. Should contain atleast 1 uppercase letter. (A-Z)
+                <br>4. Should contain atleast 1 numeric digit. (0-9)
+                <br>5. Should contain atleast 1 special character. (!@#$%^&*())<br>
+                </span><br>
 
 
                 <input type="password" class="login-input" name="passwordcon" ng-model="passwordcon" required placeholder="Confirm Password"><br>
                 <span class="error" ng-show="personForm.passwordcon.$error.required">*</span>
-                <span class="error" ng-show="password != passwordcon">Passwords Dont match</span><br>
+                <span class="error" ng-show="password != passwordcon">Passwords Don't Match</span><br>
 
 
                 <input type="text" class="login-input" name="mobilenumber" ng-model="mobilenumber" ng-pattern="/^([0-9]{10})$/"  placeholder="Mobile number" required /><br>

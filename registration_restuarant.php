@@ -28,7 +28,17 @@
     if (isset($_REQUEST['resName'])) {
         // removes backslashes
         
-        $resName = $_REQUEST['resName'];
+        $resName = htmlspecialchars($_REQUEST['resName']);
+        // adding escape character for ' character
+        $resNameTemp = "";
+        for($i=0; $i<strlen($resName); $i++) {
+            if($resName[$i] == "'") {
+                $resNameTemp .= "\\";
+            }
+            $resNameTemp .= $resName[$i];
+        }
+        $resName = $resNameTemp;
+        
         $resEmailId = $_REQUEST['resEmailId'];
         $resAddress = $_REQUEST['resAddress'];
         $resType_f = $_REQUEST['resType'];
@@ -64,6 +74,7 @@
         $resOpeningTime = $_REQUEST['resOpeningTime'];
         $resClosingTime = $_REQUEST['resClosingTime'];
         $password = $_REQUEST['password'];
+        $passwordhash = password_hash($password, PASSWORD_DEFAULT);
 
         // echo $resName;
         // echo $resEmailId;
@@ -72,6 +83,7 @@
         // echo $resOpeningTime;
         // echo $resClosingTime;
         // echo $password;
+        // echo $passwordhash;
 
 
         $sql="SELECT * FROM `restaurant` WHERE `resEmailId` LIKE '$resEmailId'";
@@ -85,26 +97,26 @@
         }
 
         if (move_uploaded_file($_FILES['resPicture']['tmp_name'], $uploadfile)) {
-            echo "File is valid, and was successfully uploaded.\n";
+            // echo "File is valid, and was successfully uploaded.\n";
         } else {
             echo "Upload failed a".$_FILES["resPicture"]["error"];
             echo file_put_contents($uploadfile, 'testing_writing_to_file');
         }
 
-        $query = "INSERT INTO restaurant "
-        ."(resName, resEmailId, resAddress, resType, resPicture, resOpeningTime, resClosingTime, password) VALUES "
-        ."('$resName', '$resEmailId', '$resAddress', '$resType', '$filename', '$resOpeningTime', '$resClosingTime', '$password');";
+        $query = "INSERT INTO restaurant (resName, resEmailId, resAddress, resType, resPicture, resOpeningTime, resClosingTime, password)
+        VALUES ('$resName', '$resEmailId', '$resAddress', '$resType', '$filename', '$resOpeningTime', '$resClosingTime', '$passwordhash');";
+        
 
-        $result   = mysqli_query($con, $query);
+        $result = mysqli_query($con, $query);
         if ($result) {
             echo "<div class='form'>
                   <h3>You are registered successfully.</h3><br/>
-                  <p class='link'>Click here to <a href='login_restuarant.php'>Login</a></p>
+                  <p class='link'>Click here to <a href='login_restaurant.php'>Login</a></p>
                   </div>";
         } else {
             echo "<div class='form'>
                   <h3>Query wasnt updated.</h3><br/>
-                  <p class='link'>Click here to <a href='login_restuarant.php'>registration</a> again.</p>
+                  <p class='link'>Click here to <a href='registration_restuarant.php'>registration</a> again.</p>
                   </div>";
         }
     
@@ -120,7 +132,7 @@
         <hr>
             <h1 class="login-title">Restaurant Registration</h1>
 
-            <input type="text" class="login-input" name="resName" ng-model="resName" ng-pattern="/^([a-z]|[A-Z]){2,}$/" placeholder="Restaurant Name" required /><br>
+            <input type="text" class="login-input" name="resName" ng-model="resName" ng-pattern="/^[a-zA-Z\d\s'@&]{2,}$/" placeholder="Restaurant Name" required /><br>
             <span class="error" ng-show="restaurantForm.resName.$error.required">*</span>
             <span class="error" ng-show="restaurantForm.resName.$dirty && restaurantForm.resName.$error.pattern">Restaurant Name Should be atleast two letters</span><br>
 
@@ -221,11 +233,17 @@
                 <input type="password" class="login-input" name="password" ng-model="password" 
                 ng-pattern="/^(((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])))(?=.{8,})/" placeholder="Password" /required><br>
                 <span class="error" ng-show="restaurantForm.password.$error.required">*</span>
-                <span class="error" ng-show="restaurantForm.password.$dirty&&restaurantForm.password.$error.pattern">Please Enter a strong Password</span><br>
+                <span class="error" ng-show="restaurantForm.password.$dirty&&restaurantForm.password.$error.pattern">Please Enter a strong Password.
+                <br>1. Minimum length should be 8 characters.
+                <br>2. Should contain atleast 1 lowercase letter. (a-z)
+                <br>3. Should contain atleast 1 uppercase letter. (A-Z)
+                <br>4. Should contain atleast 1 numeric digit. (0-9)
+                <br>5. Should contain atleast 1 special character. (!@#$%^&*())<br>
+                </span><br>
 
                 <input type="password" class="login-input" name="passwordcon" ng-model="passwordcon" required placeholder="Confirm Password"><br>
                 <span class="error" ng-show="restaurantForm.passwordcon.$error.required">*</span>
-                <span class="error" ng-show="password != passwordcon">Passwords Dont match</span><br>
+                <span class="error" ng-show="password != passwordcon">Passwords Don't Match</span><br>
         
                 <input type="submit" name="submit" ng-disabled="restaurantForm.$pristine || !restaurantForm.resName.$valid || !restaurantForm.resEmailId.$valid || !restaurantForm.resAddress.$valid || !restaurantForm.password.$valid || !restaurantForm.passwordcon.$valid" value="Register" class="login-button">
                 <p class="link">Already have an account? <a href="login_restaurant.php">Login here</a></p>

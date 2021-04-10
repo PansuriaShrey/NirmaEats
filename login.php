@@ -30,22 +30,32 @@
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
         // Check user is exist in the database
-        $query    = "SELECT * FROM `user` WHERE emailId ='$email'
-                     AND password ='$password'";
+        $query    = "SELECT * FROM `user` WHERE emailId ='$email'";
         $result = mysqli_query($con, $query);
         $rows = mysqli_num_rows($result);
-        if ($rows >= 1) {
-            echo "<div class='form'>
-                   <h3>You have been directed to the required page</h3><br/>
-                  <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
-                   </div>";
-            $userid=mysqli_fetch_assoc($result)['userId'];
-            $_SESSION['userid'] = $userid;
-            //Redirect to user dashboard page
-            header("Location: user_login.php");
+        if ($rows == 1) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $passwordmatch = password_verify($password, $row['password']);
+                if($passwordmatch) {
+                    echo "<div class='form'>
+                    <h3>You have been directed to the required page</h3><br/>
+                    <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
+                    </div>";
+                    $userid = $row['userId'];
+                    $_SESSION['userid'] = $userid;
+                    //Redirect to user dashboard page
+                    header("Location: user_login.php");
+                }
+                else {
+                    echo "<div class='form'>
+                          <h3>Incorrect Username/Password.</h3><br/>
+                          <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
+                          </div>";
+                }
+            }
         } else {
             echo "<div class='form'>
-                  <h3>Incorrect Username/password.</h3><br/>
+                  <h3>Incorrect Username/Password.</h3><br/>
                   <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
                   </div>";
         }

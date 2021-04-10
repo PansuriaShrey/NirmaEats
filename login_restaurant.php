@@ -29,23 +29,35 @@
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
         // Check user is exist in the database
-        $query    = "SELECT * FROM `restaurant` WHERE resEmailId ='$email'
-                     AND password ='$password'";
+        $query    = "SELECT * FROM `restaurant` WHERE resEmailId ='$email'";
         $result = mysqli_query($con, $query);
         $rows = mysqli_num_rows($result);
         if ($rows == 1) {
-            // $_SESSION['resEmailId'] = $email;
-            $resid=mysqli_fetch_assoc($result)['resId'];
-            $_SESSION["resid"] = $resid;
-            // Redirect to user dashboard page
-            echo "<div class='form'>
-                  <h3>You have been directed to the required page</h3><br/>
-                  <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
-                  </div>";
-            header("Location: res_login.php");
+            while($row = mysqli_fetch_assoc($result)) {
+                $passwordmatch = password_verify($password, $row['password']);
+                if($passwordmatch) {
+                    // $_SESSION['resEmailId'] = $email;
+                    $resid = $row['resId'];
+                    $_SESSION["resid"] = $resid;
+                    // Redirect to user dashboard page
+                    echo "<div class='form'>
+                        <h3>You have been directed to the required page</h3><br/>
+                        <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
+                        </div>";
+                    header("Location: res_login.php");
+                }
+                else {
+                    echo  "<div class = 'form'>
+                           <h3>Incorrect Username/Password.</h3><br/>
+                           <p class='link'>Click here to <a href='login_restaurant.php'>Login</a> again.</p>
+                           </div>
+                           ";
+                }
+            }
+            
         } else {
             echo  "<div class = 'form'>
-                  <h3>Incorrect Username/password.</h3><br/>
+                  <h3>Incorrect Username/Password.</h3><br/>
                   <p class='link'>Click here to <a href='login_restaurant.php'>Login</a> again.</p>
                   </div>
                   ";
