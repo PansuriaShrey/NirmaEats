@@ -36,7 +36,15 @@
         //escapes special characters in a string
         $mobilenumber = mysqli_real_escape_string($con, $mobilenumber);
         
-
+        $sql="SELECT * FROM `user` WHERE `emailId` LIKE '$email'";
+        $checking_for_registration=mysqli_query($con,$sql);
+        if(mysqli_num_rows($checking_for_registration)==1){
+            echo "<script type='text/javascript'>
+            alert('The Email ID you registered is already registered. So please kindly re-check and register.');
+            </script>";
+            echo "<script>window.location = 'registration.php'</script>";
+            die();
+        }
         
 
         $query    = "INSERT INTO user (user_name, emailId, password, mobileNumber )"

@@ -42,8 +42,7 @@
             $userid=mysqli_fetch_assoc($result)['userId'];
             $_SESSION['userid'] = $userid;
             //Redirect to user dashboard page
-            
-            header("Location: registration.php");
+            header("Location: user_login.php");
         } else {
             echo "<div class='form'>
                   <h3>Incorrect Username/password.</h3><br/>
@@ -53,7 +52,7 @@
     } else {
 ?>
     <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
-    <form class="form" action = "" method="post" name="loginForm" novalidate ng-submit="sendForm()" autocomplete="off">
+    <form class="form" action = "login.php" method="post" name="loginForm" novalidate ng-submit="sendForm()" autocomplete="off">
         <a href="index.php">
         <center><img src="assets/images/logo.png" alt="logo" height="100px" width= "250px" ></center>
         </a>
@@ -61,11 +60,13 @@
         <hr>
         <hr>
         <h1 class="login-title">User Login</h1>
-        <input type="text" class="login-input" name="email"  ng-model="email" ng-pattern="/^[a-z|0-9|\.]{1,}(@nirmauni.ac.in)$/" placeholder="Email Address" required /><br>
-        <span class="error" ng-show="loginForm.email.$error.required">*</span>
-        <span class="error" ng-show="loginForm.email.$dirty&&loginForm.email.$error.pattern">Enter Correct Email</span><br>
+        <input type="text" class="login-input mb-2" name="email"  ng-model="email" ng-pattern="/^[a-z|0-9|\.]{1,}(@nirmauni.ac.in)$/" placeholder="Email Address" required /><br>
+        <!-- <span class="error" ng-show="loginForm.email.$error.required">*</span>
+        <span class="error" ng-show="loginForm.email.$dirty&&loginForm.email.$error.pattern">Enter Correct Email</span><br> -->
+        <p class=""></p>
 
         <input type="password" class="login-input" name="password" placeholder="Password" required /><br>
+        <p class=""></p>
 
         <input type="submit" value="Login" name="submit"  class="login-button"/>
         <p class="link">Don't have an account? <a href="registration.php">Register Now</a></p>

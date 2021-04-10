@@ -48,7 +48,7 @@
         $next_res_id=mysqli_query($con,$tempsql);
         $next_res_id=mysqli_fetch_assoc($next_res_id)["AUTO_INCREMENT"];
         $getend=$_FILES['resPicture']['name'];
-        print_r($_FILES['resPicture']);
+        // print_r($_FILES['resPicture']);
         // print_r($getend);
         // echo "<br>";
         $getend=explode(".",$getend);
@@ -60,13 +60,6 @@
         // print_r($filename);
         // echo "<br>";
         $uploadfile=$uploaddir.$filename;
-
-        if (move_uploaded_file($_FILES['resPicture']['tmp_name'], $uploadfile)) {
-            echo "File is valid, and was successfully uploaded.\n";
-        } else {
-            echo "Upload failed a".$_FILES["resPicture"]["error"];
-            echo file_put_contents($uploadfile, 'testing_writing_to_file');
-        }
 
         $resOpeningTime = $_REQUEST['resOpeningTime'];
         $resClosingTime = $_REQUEST['resClosingTime'];
@@ -80,6 +73,24 @@
         // echo $resClosingTime;
         // echo $password;
 
+
+        $sql="SELECT * FROM `restaurant` WHERE `resEmailId` LIKE '$resEmailId'";
+        $checking_for_registration=mysqli_query($con,$sql);
+        if(mysqli_num_rows($checking_for_registration)==1){
+            echo "<script type='text/javascript'>
+            alert('The Email ID you registered is already registered. So please kindly re-check and register.');
+            </script>";
+            echo "<script>window.location = 'registration_restuarant.php'</script>";
+            die();
+        }
+
+        if (move_uploaded_file($_FILES['resPicture']['tmp_name'], $uploadfile)) {
+            echo "File is valid, and was successfully uploaded.\n";
+        } else {
+            echo "Upload failed a".$_FILES["resPicture"]["error"];
+            echo file_put_contents($uploadfile, 'testing_writing_to_file');
+        }
+
         $query = "INSERT INTO restaurant "
         ."(resName, resEmailId, resAddress, resType, resPicture, resOpeningTime, resClosingTime, password) VALUES "
         ."('$resName', '$resEmailId', '$resAddress', '$resType', '$filename', '$resOpeningTime', '$resClosingTime', '$password');";
@@ -88,12 +99,12 @@
         if ($result) {
             echo "<div class='form'>
                   <h3>You are registered successfully.</h3><br/>
-                  <p class='link'>Click here to <a href='login_restaurant.php'>Login</a></p>
+                  <p class='link'>Click here to <a href='login_restuarant.php'>Login</a></p>
                   </div>";
         } else {
             echo "<div class='form'>
                   <h3>Query wasnt updated.</h3><br/>
-                  <p class='link'>Click here to <a href='login_restaurant.php'>registration</a> again.</p>
+                  <p class='link'>Click here to <a href='login_restuarant.php'>registration</a> again.</p>
                   </div>";
         }
     
