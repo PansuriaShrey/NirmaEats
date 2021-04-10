@@ -1,3 +1,18 @@
+<?php
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo "
+    <script>
+        alert('Thank you for your valuable feedback.');
+        window.location = './';
+    </script>
+    ";
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,30 +64,32 @@
                 </div>
             </div>
             <div class="col-md-9">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method='post'>
                 <div class="contact-form">
                     <div class="form-group">
                     
                     <div class="col-sm-10">          
                         <div class="texts">First Name:</div>    
-                        <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
+                        <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname" required>
                     </div>
                     </div>
                     <div class="form-group">
                     <div class="col-sm-10">  
                         <div class="texts">Last Name:</div>        
-                        <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="lname">
+                        <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="lname" required>
                     </div>
                     </div>
                     <div class="form-group">
                     <div class="col-sm-10">
                         <div class="texts">Email Address:</div>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"
+                        pattern="^[_a-zA-Z\d-]+(\.[_a-zA-Z\d-]+)*@[a-z\d-]+(\.[a-z\d-]+)*(\.[a-z]{2,3})$"  required>
                     </div>
                     </div>
                     <div class="form-group">
                     <div class="col-sm-10">
                         <div class="texts">Comments:</div>
-                        <textarea class="form-control" rows="5" placeholder="comments" id="comment"></textarea>
+                        <textarea class="form-control" rows="5" maxlength="100" placeholder="Comments (Upto 100 characters)" id="comment" name="comment" required></textarea>
                     </div>
                     </div>
                     <div class="form-group">        
@@ -81,6 +98,7 @@
                     </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>

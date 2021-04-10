@@ -52,7 +52,8 @@ body {
     z-index: 10;
   }
   .has-animation.animate-in:before {
-    background-color: rgb(60, 155, 199);
+    /* background-color: rgb(60, 155, 199); */
+    background-color: #c17f34;
   }
   .has-animation.animate-in:after {
     background-color: #202020;
