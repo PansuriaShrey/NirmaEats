@@ -216,7 +216,7 @@
                     <hr>
                     <input type="time" class="login-input" name="resClosingTime">
                 </fieldset>
-                <span class="error">* <?php echo $mobileErr;?></span><br></center>   
+                <span class="error">*</span><br></center>   
 
                 <input type="password" class="login-input" name="password" ng-model="password" 
                 ng-pattern="/^(((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])))(?=.{8,})/" placeholder="Password" /required><br>
