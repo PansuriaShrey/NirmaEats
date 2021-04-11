@@ -1,4 +1,5 @@
 <?php
+    include('accessPermission.php');
     require('db.php');
     $conn=$con;
 
