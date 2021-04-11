@@ -81,11 +81,14 @@
     <link rel="icon" href="assets/images/icon2.jpeg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <!-- <link href="assets/styles/login_user.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="assets/styles/styles.css">
     <link rel="stylesheet" href="assets/styles/index.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <title>Dashboard</title>
+
+    <link rel="stylesheet" href="assets/assets2/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
 </head>
 
 <body>
@@ -103,7 +106,7 @@
                     <?php echo "Hello, $name" ?>
                 </a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                 <a class="nav-link" href="user_login.php">Dashboard<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
@@ -181,7 +184,7 @@
 
     <?php
         include("printRestaurant.php");
-        printRestaurant($result);
+        printRestaurantSecond($result);
     ?>
 
 
