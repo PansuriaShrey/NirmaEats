@@ -369,7 +369,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         }
         else {
-            messageAlert("danger", "Error! Dish named $dishName not found in your Database.");
+            messageAlert("danger", "Error! Dish named '$dishName' not found in your Menu.");
         }
         
     }
@@ -501,11 +501,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <option value="Snack">Snack</option>
                                 <option value="Bread">Bread</option>
                                 <option value="Noodles">Noodles</option>
+                                <option value="SouthIndian">South Indian</option>
                                 <option value="Rice">Rice & Biryani</option>
                                 <option value="Pulse">Pulse</option>
+                                <option value="PizzaPasta">Pizza & Pasta</option>
                                 <option value="Beverage">Beverage</option>
                                 <option value="Drink">Drink</option>
+                                <option value="Shakes">Shakes</option>
                                 <option value="Dessert">Dessert</option>
+                                <option value="Other">Other</option>
                             </select>
                             </td>
                         </tr>
@@ -643,11 +647,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <option value="Snack" <?php if($dishTypeUp=="Snack") echo "selected"; ?>>Snack</option>
                                 <option value="Bread" <?php if($dishTypeUp=="Bread") echo "selected"; ?>>Bread</option>
                                 <option value="Noodles" <?php if($dishTypeUp=="Noodles") echo "selected"; ?>>Noodles</option>
+                                <option value="SouthIndian" <?php if($dishTypeUp=="SouthIndian") echo "selected"; ?>>South Indian</option>
                                 <option value="Rice" <?php if($dishTypeUp=="Rice") echo "selected"; ?>>Rice & Biryani</option>
                                 <option value="Pulse" <?php if($dishTypeUp=="Pulse") echo "selected"; ?>>Pulse</option>
+                                <option value="PizzaPasta" <?php if($dishTypeUp=="PizzaPasta") echo "selected"; ?>>Pizza & Pasta</option>
                                 <option value="Beverage" <?php if($dishTypeUp=="Beverage") echo "selected"; ?>>Beverage</option>
                                 <option value="Drink" <?php if($dishTypeUp=="Drink") echo "selected"; ?>>Drink</option>
+                                <option value="Shakes" <?php if($dishTypeUp=="Shakes") echo "selected"; ?>>Shakes</option>
                                 <option value="Dessert" <?php if($dishTypeUp=="Dessert") echo "selected"; ?>>Dessert</option>
+                                <option value="Other" <?php if($dishTypeUp=="Other") echo "selected"; ?>>Other</option>
                             </select>
                             </td>
                         </tr>
@@ -747,13 +755,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "
                 <div style='width: 50%' class='swiper-slide'>
                 <div class='testimonial-wrap'>
-                    <div class='testimonial-item'>
+                    <div class='testimonial-item rounded'>
                     <div class='mydiv'>
+
                         <img style='color: black;' src='assets/images/$dishPicture' class='testimonial-img img-fluid' alt='&nbsp;&nbsp;&nbsp;&nbsp;No image found'>
-                        <h2 style='color: black;'>$dishName</h2>
-                        <h3>$dishDesc</h3>
-                        <h3>Rs $dishPrice /-</h3>
-                        <h3>$dishVeg</h3>
+
+                        <table class='table table-hover'>
+                            <thead class=''>
+                            <tr>
+                                <th scope='col'><div class='h5 mb-0'>$dishName</div></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>$dishDesc</td>
+                            </tr>
+                            <tr>
+                                <td>Rs $dishPrice /-</td>
+                            </tr>
+                            <tr>
+                                <td>$dishVeg</td>
+                            </tr>
+                            </tbody>
+                        </table>
+         
                     </div>
                     </div>
                 </div>
