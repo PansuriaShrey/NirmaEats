@@ -35,6 +35,7 @@
         if ($rows == 1) {
             while($row = mysqli_fetch_assoc($result)) {
                 $passwordmatch = password_verify($password, $row['password']);
+                // $passwordmatch = ($password == $row['password']);
                 if($passwordmatch) {
                     // $_SESSION['resEmailId'] = $email;
                     $resid = $row['resId'];
