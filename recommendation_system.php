@@ -5,6 +5,9 @@
     }
     echo "Connected Successfully";
 
+    //variables
+    $maxAverageSpent = 0;
+
     //----------------------------------Exhaustive restaurant list and Restaurant Type------------------------------------------
     $arr = array();
     $query_resType    = "SELECT * FROM `restaurant`";
@@ -41,13 +44,15 @@
     					"Beverage"=>0,
     					"Drink"=>0,
     					"Dessert"=>0,
+    					//--totalorders
+    					"totalOrders"=>0,
     					//--avg Price
     					"avgDishPrice"=>0,
     					//--reviews
     					"totalStars"=>0,
-
     					"totalReview"=>0,
     					"avgReview"=>0,
+    					"normalisedReview"=>0,
     				);
                 	echo "<tr>";
                 	echo "<td>".$row["resId"]."</td>";
@@ -75,7 +80,7 @@
 
     //-----------------Count number of orders from all restaurants by dishtype-------------------
 
-    $query_JOIN = "SELECT `bill`.`billId`, `bill`.`resId`, `billDetails`.`dishId`, `dish`.`dishType`, COUNT(`dish`.`dishType`) AS `sumDish` FROM `billDetails` LEFT JOIN `bill` ON `billDetails`.`billID` = `bill`.`billID` LEFT JOIN `dish` ON `billDetails`.`dishId` = `dish`.`dishId` GROUP BY `bill`.`resId`, `dish`.`dishType`";
+    $query_JOIN = "SELECT `bill`.`billId`, `bill`.`resId`, `billDetails`.`dishId`, `dish`.`dishType`, SUM(`billDetails`.`Quantity`) AS `sumDish` FROM `billDetails` LEFT JOIN `bill` ON `billDetails`.`billID` = `bill`.`billID` LEFT JOIN `dish` ON `billDetails`.`dishId` = `dish`.`dishId` GROUP BY `bill`.`resId`, `dish`.`dishType`";
 	$result_JOIN = mysqli_query($con, $query_JOIN); 
 	$rows = mysqli_num_rows($result_JOIN);
     if (mysqli_num_rows($result_JOIN) > 0){
@@ -91,6 +96,29 @@
                 	echo "<td>".$row["dishType"]."</td>";
                 	echo "<td>".$row["sumDish"]."</td>";
                 	$arr[$row["resId"]][$row["dishType"]] = $row["sumDish"];
+                }
+                echo "</table>";
+    }
+    else{
+    	echo "Not working";
+    }
+
+    //-----------------Count number of orders from all restaurants by dishtype-------------------
+
+    $query_JOIN_res = "SELECT `bill`.`billId`, `bill`.`resId`, `billDetails`.`dishId`, `dish`.`dishType`, SUM(`billDetails`.`Quantity`) AS `sumDish` FROM `billDetails` LEFT JOIN `bill` ON `billDetails`.`billID` = `bill`.`billID` LEFT JOIN `dish` ON `billDetails`.`dishId` = `dish`.`dishId` GROUP BY `bill`.`resId`";
+	$result_JOIN_res = mysqli_query($con, $query_JOIN_res); 
+	$rows = mysqli_num_rows($result_JOIN_res);
+    if (mysqli_num_rows($result_JOIN_res) > 0){
+    	echo "IN";
+    	echo "<table border='1'>";
+    	echo "<tr>";
+                	echo "<td>"."resId"."</td>";
+                	echo "<td>"."sumDish"."</td>";
+    while($row = mysqli_fetch_assoc($result_JOIN_res)) {
+                	echo "<tr>";
+                	echo "<td>".$row["resId"]."</td>";
+                	echo "<td>".$row["sumDish"]."</td>";
+                	$arr[$row["resId"]]["totalOrders"] = $row["sumDish"];
                 }
                 echo "</table>";
     }
@@ -141,6 +169,7 @@
                 	$arr[$row["resId"]]["totalStars"] = $row["totalStars"];
                 	$arr[$row["resId"]]["totalReview"] = $row["totalReview"];
                 	$arr[$row["resId"]]["avgReview"] = $row["totalStars"]/$row["totalReview"];
+                	$arr[$row["resId"]]["normalisedReview"] = 0.5*($arr[$row["resId"]]["avgReview"]) + 2.5*(1 - exp(-$row["totalReview"]/20));
 
                 }
                 echo "</table>";
@@ -148,6 +177,8 @@
     else{
     	echo "Not working";
     }
+
+
 //----------------------------------------------------------------------------------------------
     echo "<table border=1>";
     echo "<tr>";
@@ -169,10 +200,12 @@
     echo "<td>"."Beverage"."</td>";
     echo "<td>"."Drink"."</td>";
     echo "<td>"."Dessert"."</td>";
+    echo "<td>"."totalOrders"."</td>";
     echo "<td>"."avgDishPrice"."</td>";
     echo "<td>"."totalStars"."</td>";
     echo "<td>"."totalReview"."</td>";
     echo "<td>"."avgReview"."</td>";
+    echo "<td>"."normlisedReview"."</td>";
     echo "</tr>";
 
     foreach($arr as $x => $val) {
@@ -186,7 +219,7 @@
 	}
 	echo "</table>";
 
-	//----------------------------------Exhaustive restaurant list and Restaurant Type------------------------------------------
+	//----------------------------------Exhaustive user list------------------------------------------
     
     $arr_u = array();
     $query_userType    = "SELECT * FROM `user`";
@@ -215,6 +248,7 @@
     					"Drink"=>0,
     					"Dessert"=>0,
     					"AverageSpent"=>0,
+    					"TotalOrders" => 0,
     					//--reviews
     					$res = array_fill_keys(array_keys($arr),0)
     				);
@@ -227,7 +261,54 @@
     	echo "Not working";
     }
 
-	//-----------------User Orders By restaurant Type-------------------
+	//----------------------------------------------------Average Dish Price by User------------------------------------------    
+
+    $query_avgDishPriceUser = "SELECT `bill`.`userId`, SUM(`billDetails`.`Quantity`) AS `totalQuantity`, SUM(`bill`.`totalPay`) AS `TotalPay` FROM `billDetails` LEFT JOIN `bill` ON `billDetails`.`billId` = `bill`.`billId` GROUP BY `bill`.`userId`";
+	$result_avgDishPriceUser = mysqli_query($con, $query_avgDishPriceUser); 
+	$rows = mysqli_num_rows($result_avgDishPriceUser);
+    if (mysqli_num_rows($result_avgDishPriceUser) > 0){
+    	echo "IN";
+    	echo "<table border='1'>";
+    	echo "<tr>";
+                	echo "<td>"."userId"."</td>";
+                	echo "<td>"."totalQuantity"."</td>";
+                	echo "<td>"."totalPay"."</td>";
+    while($row = mysqli_fetch_assoc($result_avgDishPriceUser)) {
+                	echo "<tr>";
+                	echo "<td>".$row["userId"]."</td>";
+                	echo "<td>".$row["totalQuantity"]."</td>";
+                	echo "<td>".$row["TotalPay"]."</td>";
+                	if($row["totalQuantity"]!=0)
+                	{
+                		$arr_u[$row["userId"]]["AverageSpent"] = ($row["TotalPay"]/$row["totalQuantity"]);
+                	}
+                	else
+                	{
+                		$arr_u[$row["userId"]]["AverageSpent"] = 0;
+                	}
+                	if($arr_u[$row["userId"]]["AverageSpent"] > $maxAverageSpent){
+                			$maxAverageSpent = $arr_u[$row["userId"]]["AverageSpent"];
+                	}
+            		$arr_u[$row["userId"]]["TotalOrders"] = $row["totalQuantity"];
+                }
+                
+                echo "</table>";
+
+				//----------------------------------               
+
+    $result_avgDishPriceUser1 = mysqli_query($con, $query_avgDishPriceUser); 
+    while($row = mysqli_fetch_assoc($result_avgDishPriceUser1)) {
+    	if($maxAverageSpent!=0){
+    		$arr_u[$row["userId"]]["AverageSpent"] = ($arr_u[$row["userId"]]["AverageSpent"])/($maxAverageSpent);
+    	}
+    	
+    }
+}
+    else{
+    	echo "Not working";
+    }
+
+	//-----------------User Orders By restaurant Type------------------------------------------------------------------
 
     $query_userRes = "SELECT `userId`, `resId`, COUNT(`resId`) AS `resSum` FROM `bill` GROUP BY `userId`, `resId`";
 	$result_userRes = mysqli_query($con, $query_userRes); 
@@ -254,7 +335,7 @@
 
     //-----------------Count number of orders from all users by dishtype-------------------
 
-    $query_uJOIN = "SELECT `bill`.`billId`, `bill`.`userId`, `billDetails`.`dishId`, `dish`.`dishType`, COUNT(`dish`.`dishType`) AS `sumDish` FROM `billDetails` LEFT JOIN `bill` ON `billDetails`.`billID` = `bill`.`billID` LEFT JOIN `dish` ON `billDetails`.`dishId` = `dish`.`dishId` GROUP BY `bill`.`userId`, `dish`.`dishType`";
+    $query_uJOIN = "SELECT `bill`.`billId`, `bill`.`userId`, `billDetails`.`dishId`, `dish`.`dishType`, SUM(`billDetails`.`Quantity`) AS `sumDish` FROM `billDetails` LEFT JOIN `bill` ON `billDetails`.`billID` = `bill`.`billID` LEFT JOIN `dish` ON `billDetails`.`dishId` = `dish`.`dishId` GROUP BY `bill`.`userId`, `dish`.`dishType`";
 	$result_uJOIN = mysqli_query($con, $query_uJOIN); 
 	$rows = mysqli_num_rows($result_uJOIN);
     if (mysqli_num_rows($result_uJOIN) > 0){
@@ -269,7 +350,7 @@
                 	echo "<td>".$row["userId"]."</td>";
                 	echo "<td>".$row["dishType"]."</td>";
                 	echo "<td>".$row["sumDish"]."</td>";
-                	$arr_u[$row["userId"]][$row["dishType"]] = $row["sumDish"];
+                	$arr_u[$row["userId"]][$row["dishType"]] = $row["sumDish"]/$arr_u[$row["userId"]]["TotalOrders"];
                 	//echo $arr[$row["userId"]][$row["dishType"]];
                 }
                 echo "</table>";
@@ -280,30 +361,23 @@
 
     //-------------------------------------------------------------------------------------------
 
-    $query_avgDishPriceUser = "SELECT `bill`.`userId`, SUM(`billDetails`.`Quantity`) AS `totalQuantity`, SUM(`bill`.`totalPay`) AS `TotalPay` FROM `billDetails` LEFT JOIN `bill` ON `billDetails`.`billId` = `bill`.`billId` GROUP BY `bill`.`userId`";
-	$result_avgDishPriceUser = mysqli_query($con, $query_avgDishPriceUser); 
-	$rows = mysqli_num_rows($result_avgDishPriceUser);
-    if (mysqli_num_rows($result_avgDishPriceUser) > 0){
+    $query_uJOINreview = "SELECT `reviewStash`.`userId`, `dish`.`dishType`, AVG(`reviewStash`.`stars`) AS `avgStars` FROM `reviewStash` LEFT JOIN `dish` ON `reviewStash`.`dishID` = `dish`.`dishID`  GROUP BY `reviewStash`.`userId`, `dish`.`dishType`";
+	$result_uJOINreview = mysqli_query($con, $query_uJOINreview); 
+	$rows = mysqli_num_rows($result_uJOINreview);
+    if (mysqli_num_rows($result_uJOINreview) >= 0){
     	echo "IN";
     	echo "<table border='1'>";
     	echo "<tr>";
                 	echo "<td>"."userId"."</td>";
-                	echo "<td>"."totalQuantity"."</td>";
-                	echo "<td>"."totalPay"."</td>";
-    while($row = mysqli_fetch_assoc($result_avgDishPriceUser)) {
+                	echo "<td>"."dishType"."</td>";
+                	echo "<td>"."avgStars"."</td>";
+    while($row = mysqli_fetch_assoc($result_uJOINreview)) {
                 	echo "<tr>";
                 	echo "<td>".$row["userId"]."</td>";
-                	echo "<td>".$row["totalQuantity"]."</td>";
-                	echo "<td>".$row["TotalPay"]."</td>";
-                	if($row["totalQuantity"]!=0)
-                	{
-                		$arr_u[$row["userId"]]["AverageSpent"] = ($row["TotalPay"]/$row["totalQuantity"]);
-                	}
-                	else
-                	{
-                		$arr_u[$row["userId"]]["AverageSpent"] = 0;
-                	}
-                		
+                	echo "<td>".$row["dishType"]."</td>";
+                	echo "<td>".$row["avgStars"]."</td>";
+                	//$arr_u[$row["userId"]][$row["dishType"]] = $row["sumDish"]/$arr_u[$row["userId"]]["TotalOrders"];
+                	//echo $arr[$row["userId"]][$row["dishType"]];
                 }
                 echo "</table>";
     }
@@ -311,7 +385,7 @@
     	echo "Not working";
     }
 
-    //----------------------------------------
+    //------------------------------------------------------------------------------------------------
 
     echo "<table border=1>";
     echo "<tr>";
@@ -330,6 +404,8 @@
     echo "<td>"."Drink"."</td>";
     echo "<td>"."Dessert"."</td>";
     echo "<td>"."AverageSpent"."</td>";
+    echo "<td>"."TotalOrders"."</td>";
+
 
     foreach($arr_u[1][0] as $x => $val){
     	echo "<td>"."resId = "."$x"."</td>";
@@ -354,6 +430,73 @@
 
 	}
 	echo "</table>";
-		
 
+
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	/*function dist($a,$b){
+		return 
+	}*/
+
+	function KNN($arr_u,$userId,$k){
+		//echo "<table border = 1>";
+		$distances = array();
+		foreach($arr_u as $x => $val) {
+    	//echo "<tr>";
+    	//echo "<td>"."$x"."</td>";
+			if($x!=$userId){
+
+				$dist = 0;
+				foreach($val as $y => $y_val) {
+					if($y!="TotalOrders"){
+						$dist = $dist + ($arr_u[$userId][$y]-$y_val)**2;
+						//echo "<br>";
+					}
+					else{
+						break;
+					}
+  			
+				}
+				$dist = $dist/14;
+				$dist = $dist**(1/2);
+				echo $dist;
+				echo "<br>";
+				$distances[$x] = $dist;
+			}
+
+
+		}
+		asort($distances);
+		foreach($distances as $x => $x_val){
+			//echo $x;
+			//echo "<br>";
+		}
+		$count = 0;
+		$answer = array();
+		foreach($distances as $x => $x_val){
+			if($count >= $k){
+				break;
+			}
+			foreach($arr_u[$x][0] as $y => $y_val){
+				if($answer[$y]==NULL)
+				{
+					$answer[$y] = $y_val;
+				}
+				$answer[$y] = $answer[$y] + $y_val;
+				//echo $y." ";
+				//echo $answer[$y];
+				//echo "<br>";
+			}
+			$count = $count + 1;
+		}
+		arsort($answer);
+		return $answer;
+
+	}
+	$answer = KNN($arr_u,1,3);
+	foreach($answer as $x => $x_val){
+		echo $x;
+		echo "<br>";
+	}
+	//echo $arr_u[1]["Dosa"];
 ?>
