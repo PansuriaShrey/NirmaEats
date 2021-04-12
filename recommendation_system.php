@@ -1,9 +1,11 @@
 <?php
+    session_start();
     $con = mysqli_connect("localhost","root","","nirmaeats");
     if (mysqli_connect_errno()){
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
     echo "Connected Successfully";
+
 
     //variables
     $maxAverageSpent = 0;
@@ -151,6 +153,7 @@
 
     //-------------------------------------Average reviews and Total reviews---------------------------------
 
+    $reviewThreshold = 5;
     $query_reviews = "SELECT `resId`, SUM(`reviewDish`.`totalStar`) AS `totalStars`, SUM(`reviewDish`.`totalReview`) AS `totalReview` FROM `reviewDish` LEFT JOIN `dish` ON `reviewDish`.`dishId` = `dish`.`dishId` GROUP BY `dish`.`resId`";
 	$result_reviews = mysqli_query($con, $query_reviews); 
 	$rows = mysqli_num_rows($result_reviews);
@@ -169,7 +172,7 @@
                 	$arr[$row["resId"]]["totalStars"] = $row["totalStars"];
                 	$arr[$row["resId"]]["totalReview"] = $row["totalReview"];
                 	$arr[$row["resId"]]["avgReview"] = $row["totalStars"]/$row["totalReview"];
-                	$arr[$row["resId"]]["normalisedReview"] = 0.5*($arr[$row["resId"]]["avgReview"]) + 2.5*(1 - exp(-$row["totalReview"]/20));
+                	$arr[$row["resId"]]["normalisedReview"] = 0.5*($arr[$row["resId"]]["avgReview"]) + 2.5*(1 - exp(-$row["totalReview"]/$reviewThreshold));
 
                 }
                 echo "</table>";
@@ -535,9 +538,15 @@
 
     $k = 3;
     $userId = 5;
+    if(isset($_SESSION["userid"])){
+        echo $userId;
+        $userId = $_SESSION["userid"];
+    }
+    echo $userId;
+    $recommended_restaurants = array();
 
     if($arr_u[$userId]["TotalOrders"]<10){
-        $recommended_restaurants = array();
+        // $recommended_restaurants = array();
         foreach($arr as $x => $x_val){
             $recommended_restaurants[$x] = $arr[$x]["normalisedReview"];
         }
