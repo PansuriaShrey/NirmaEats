@@ -222,6 +222,7 @@
 	//----------------------------------Exhaustive user list------------------------------------------
     
     $arr_u = array();
+    $arr_ur = array();
     $query_userType    = "SELECT * FROM `user`";
     $result_userType = mysqli_query($con, $query_userType);
     $rows = mysqli_num_rows($result_userType);
@@ -231,7 +232,7 @@
     	echo "<tr>";
 	    	echo "<td>"."userId"."</td>";
     while($row = mysqli_fetch_assoc($result_userType)) {
-
+    				//-----array for order percentage
     				$arr_u[$row["userId"]] = array(
     					//---dishtypes
     					"Dosa"=>0,
@@ -248,7 +249,30 @@
     					"Drink"=>0,
     					"Dessert"=>0,
     					"AverageSpent"=>0,
+    					
+    					//--reviews
+    					$res = array_fill_keys(array_keys($arr),0),
     					"TotalOrders" => 0,
+    				);
+
+    				//----------array for reviews
+
+    				$arr_ur[$row["userId"]] = array(
+    					//---dishtypes
+    					"Dosa"=>0,
+    					"Salad"=>0,
+    					"Starter"=>0,
+    					"Vegetable"=>0,
+    					"Soup"=>0,
+    					"Snack"=>0,
+    					"Bread"=>0,
+    					"Noodles"=>0,
+    					"Rice & Biryani"=>0,
+    					"Pulse"=>0,
+    					"Beverage"=>0,
+    					"Drink"=>0,
+    					"Dessert"=>0,
+    					
     					//--reviews
     					$res = array_fill_keys(array_keys($arr),0)
     				);
@@ -326,6 +350,7 @@
                 	echo "<td>".$row["resId"]."</td>";
                 	echo "<td>".$row["resSum"]."</td>";
                 	$arr_u[$row["userId"]][0][$row["resId"]] = $row["resSum"];
+                	$arr_ur[$row["userId"]][0][$row["resId"]] = $row["resSum"];
                 }
                 echo "</table>";
     }
@@ -359,7 +384,7 @@
     	echo "Not working";
     }
 
-    //-------------------------------------------------------------------------------------------
+    //---------------------------------------reviews by user and dish type----------------------------------------------------
 
     $query_uJOINreview = "SELECT `reviewStash`.`userId`, `dish`.`dishType`, AVG(`reviewStash`.`stars`) AS `avgStars` FROM `reviewStash` LEFT JOIN `dish` ON `reviewStash`.`dishID` = `dish`.`dishID`  GROUP BY `reviewStash`.`userId`, `dish`.`dishType`";
 	$result_uJOINreview = mysqli_query($con, $query_uJOINreview); 
@@ -376,7 +401,7 @@
                 	echo "<td>".$row["userId"]."</td>";
                 	echo "<td>".$row["dishType"]."</td>";
                 	echo "<td>".$row["avgStars"]."</td>";
-                	//$arr_u[$row["userId"]][$row["dishType"]] = $row["sumDish"]/$arr_u[$row["userId"]]["TotalOrders"];
+                	$arr_ur[$row["userId"]][$row["dishType"]] = $row["avgStars"];
                 	//echo $arr[$row["userId"]][$row["dishType"]];
                 }
                 echo "</table>";
@@ -404,12 +429,12 @@
     echo "<td>"."Drink"."</td>";
     echo "<td>"."Dessert"."</td>";
     echo "<td>"."AverageSpent"."</td>";
-    echo "<td>"."TotalOrders"."</td>";
 
 
     foreach($arr_u[1][0] as $x => $val){
     	echo "<td>"."resId = "."$x"."</td>";
     }
+    echo "<td>"."TotalOrders"."</td>";
     foreach($arr_u as $x => $val) {
     	echo "<tr>";
     	echo "<td>"."$x"."</td>";
@@ -431,6 +456,49 @@
 	}
 	echo "</table>";
 
+	//------------------------------------------------------------------------------------------------
+
+    echo "<table border=1>";
+    echo "<tr>";
+    echo "<td>"."userId"."</td>";
+    echo "<td>"."Dosa"."</td>";
+    echo "<td>"."Salad"."</td>";
+    echo "<td>"."Starter"."</td>";
+    echo "<td>"."Vegetable"."</td>";
+    echo "<td>"."Soup"."</td>";
+    echo "<td>"."Snack"."</td>";
+    echo "<td>"."Bread"."</td>";
+    echo "<td>"."Noodles"."</td>";
+    echo "<td>"."Rice & Biryani"."</td>";
+    echo "<td>"."Pulse"."</td>";
+    echo "<td>"."Beverage"."</td>";
+    echo "<td>"."Drink"."</td>";
+    echo "<td>"."Dessert"."</td>";
+
+
+    foreach($arr_ur[1][0] as $x => $val){
+    	echo "<td>"."resId = "."$x"."</td>";
+    }
+    foreach($arr_ur as $x => $val) {
+    	echo "<tr>";
+    	echo "<td>"."$x"."</td>";
+		foreach($val as $y => $y_val) {
+			if(gettype($y_val)!="array"){
+				echo "<td>"."$y_val"."</td>";
+			}
+			else
+			{
+				foreach($y_val as $y_val_x => $y_val_value)
+				{
+					echo "<td>"."$y_val_value"."</td>";
+				}
+			}
+  			
+		}
+		echo "</tr>";
+
+	}
+	echo "</table>";
 
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
@@ -447,17 +515,22 @@
 			if($x!=$userId){
 
 				$dist = 0;
+				$count = 0;
 				foreach($val as $y => $y_val) {
-					if($y!="TotalOrders"){
+					$count = $count+1;
+					if(gettype($y_val)!="array"){
 						$dist = $dist + ($arr_u[$userId][$y]-$y_val)**2;
 						//echo "<br>";
+					}
+					else if(gettype($y_val)=="array"){
+						break;
 					}
 					else{
 						break;
 					}
   			
 				}
-				$dist = $dist/14;
+				$dist = $dist/$count;
 				$dist = $dist**(1/2);
 				echo $dist;
 				echo "<br>";
