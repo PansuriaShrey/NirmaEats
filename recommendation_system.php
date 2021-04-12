@@ -502,25 +502,16 @@
 
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	/*function dist($a,$b){
-		return 
-	}*/
-
 	function KNN($arr_u,$userId,$k){
-		//echo "<table border = 1>";
 		$distances = array();
 		foreach($arr_u as $x => $val) {
-    	//echo "<tr>";
-    	//echo "<td>"."$x"."</td>";
 			if($x!=$userId){
-
 				$dist = 0;
 				$count = 0;
 				foreach($val as $y => $y_val) {
 					$count = $count+1;
 					if(gettype($y_val)!="array"){
 						$dist = $dist + ($arr_u[$userId][$y]-$y_val)**2;
-						//echo "<br>";
 					}
 					else if(gettype($y_val)=="array"){
 						break;
@@ -532,44 +523,94 @@
 				}
 				$dist = $dist/$count;
 				$dist = $dist**(1/2);
-				echo $dist;
-				echo "<br>";
+				//echo $dist;
+				//echo "<br>";
 				$distances[$x] = $dist;
 			}
 
-
 		}
 		asort($distances);
-		foreach($distances as $x => $x_val){
-			//echo $x;
-			//echo "<br>";
-		}
-		$count = 0;
-		$answer = array();
-		foreach($distances as $x => $x_val){
-			if($count >= $k){
-				break;
-			}
-			foreach($arr_u[$x][0] as $y => $y_val){
-				if($answer[$y]==NULL)
-				{
-					$answer[$y] = $y_val;
-				}
-				$answer[$y] = $answer[$y] + $y_val;
-				//echo $y." ";
-				//echo $answer[$y];
-				//echo "<br>";
-			}
-			$count = $count + 1;
-		}
-		arsort($answer);
-		return $answer;
+        return $distances;
+	}
 
-	}
-	$answer = KNN($arr_u,1,3);
-	foreach($answer as $x => $x_val){
-		echo $x;
-		echo "<br>";
-	}
-	//echo $arr_u[1]["Dosa"];
+    $k = 3;
+    $userId = 5;
+
+    if($arr_u[$userId]["TotalOrders"]<10){
+        $recommended_restaurants = array();
+        foreach($arr as $x => $x_val){
+            $recommended_restaurants[$x] = $arr[$x]["normalisedReview"];
+        }
+        arsort($recommended_restaurants);
+        $recommended_restaurants = array_keys($recommended_restaurants);
+        print_r($recommended_restaurants);
+        
+    }
+    else{
+
+        $distances_1 = KNN($arr_u,$userId,$k);
+        /*foreach($distances_1 as $x => $x_val){
+                echo $x;
+                echo "<br>";
+            }*/
+        $count = 0;
+        $answer = array();
+        foreach($distances_1 as $x => $x_val){
+            if($count >= $k){
+                break;
+            }
+            foreach($arr_u[$x][0] as $y => $y_val){
+                if($answer[$y]==NULL)
+                {
+                    $answer[$y] = $y_val;
+                }
+                else
+                {
+                    $answer[$y] = $answer[$y] + $y_val;
+                }
+                
+            }
+                $count = $count + 1;
+        }
+        /*echo "<br>";
+        foreach($answer as $x => $x_val){
+            echo $x."->".$x_val;
+            echo "<br>";
+        }*/
+        
+
+        $distances_2 = KNN($arr_ur,$userId,$k);
+        /*foreach($distances_2 as $x => $x_val){
+                echo $x;
+                echo "<br>";
+            }*/
+        $count = 0;
+        foreach($distances_2 as $x => $x_val){
+            if($count >= $k){
+                break;
+            }
+            foreach($arr_ur[$x][0] as $y => $y_val){
+                if($answer[$y]==NULL)
+                {
+                    $answer[$y] = $y_val;
+                }
+                else
+                {
+                    $answer[$y] = $answer[$y] + $y_val;
+                }
+            }
+            $count = $count + 1;
+        }
+
+        arsort($answer);
+       
+        /*echo "<br>";
+    	foreach($answer as $x => $x_val){
+    		echo $x."->".$x_val;
+    		echo "<br>";
+    	}*/
+
+        $recommended_restaurants = array_keys($answer);
+        print_r($recommended_restaurants);
+    }
 ?>
