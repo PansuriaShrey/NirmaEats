@@ -36,6 +36,7 @@
         if ($rows == 1) {
             while($row = mysqli_fetch_assoc($result)) {
                 $passwordmatch = password_verify($password, $row['password']);
+                // $passwordmatch = ($password == $row['password']);
                 if($passwordmatch) {
                     echo "<div class='form'>
                     <h3>You have been directed to the required page</h3><br/>

@@ -147,6 +147,7 @@
                 echo "
                         <div class='col-sm text-center'>
                             <a href='review_bill.php?billid=$billid' class='text-danger bg-light pl-1 pr-1'> Review</a>
+                            <br><a href='download_bill.php?billid=$billid' target='_blank' class='text-danger bg-light pl-1 pr-1'> Download Invoice </a>
                         </div>
                 ";
             }
@@ -154,6 +155,7 @@
                 echo "
                         <div class='col-sm text-center'>
                             <a href='#' class='text-success bg-light pl-1 pr-1'> Already Reviewed</a>
+                            <br><a href='download_bill.php?billid=$billid' target='_blank' class='text-danger bg-light pl-1 pr-1'> Download Invoice </a>
                         </div>
                 ";
             }
