@@ -150,8 +150,8 @@
                 ?>
                 <tr>
                 <td colspan='4' class='text-right'>
-                    <form action='./proceed.php' method='POST'>
-                        <input type='submit' value='Proceed to Place Order'>
+                <form action='' method='POST' name="pord">
+                        <input type='submit' value='Place order' onclick="return SubmitForm();" >
                     </form>
                 </td>
                 </tr>
@@ -174,5 +174,17 @@
 <script>
 if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
+}
+
+function SubmitForm()
+{
+     document.pord.action='./bill_invoice.php';
+     document.pord.target='_blank';
+     document.pord.submit();
+
+     document.pord.action='./proceed.php';
+     document.pord.target='';
+     document.pord.submit();    
+     return true;
 }
 </script>
