@@ -94,9 +94,12 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Project Link: [https://github.com/PansuriaShrey/NirmaEats](https://github.com/PansuriaShrey/NirmaEats)
 
 Shrey Pansuria -  [@PansuriaShrey](https://github.com/PansuriaShrey) - pansuriashrey@gmail.com
+
 Parth Shah - [@parth-99](https://github.com/parth-99) - parth.divylok@gmail.com
-Aakash Shah -  [@Siivn-A](https://github.com/Siivn-A) - 18bce214@nirmauni.ac.in
-Shivam Ajudia -  [@Aakashc137](https://github.com/Aakashc137) - 18bce223@nirmauni.ac.in
+
+Aakash Shah - [@Aakashc137](https://github.com/Aakashc137) - aakash.shah.2401@gmail.com
+
+Shivam Ajudia -  [@Siivn-A](https://github.com/Siivn-A) - shivamajudiya@gmail.com
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
@@ -108,19 +111,19 @@ Shivam Ajudia -  [@Aakashc137](https://github.com/Aakashc137) - 18bce223@nirmaun
 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/issues/PansuriaShrey/NirmaEats?label=ISSUES&style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/PansuriaShrey/NirmaEats?style=for-the-badge
 
 [contributors-url]: https://github.com/PansuriaShrey/NirmaEats/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/PansuriaShrey/NirmaEats?label=FORKS&style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/PansuriaShrey/NirmaEats?style=for-the-badge
 
 [forks-url]: https://github.com/PansuriaShrey/NirmaEats/network/members
 
-[stars-shield]: https://img.shields.io/github/forks/PansuriaShrey/NirmaEats?label=STARS&style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/PansuriaShrey/NirmaEats?style=for-the-badge
 
 [stars-url]: https://github.com/PansuriaShrey/NirmaEats/stargazers
 
-[license-shield]: https://img.shields.io/github/forks/PansuriaShrey/NirmaEats?label=LICENSE&style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/PansuriaShrey/NirmaEats?style=for-the-badge
 
 [license-url]: https://github.com/PansuriaShrey/NirmaEats/blob/main/LICENSE
 
