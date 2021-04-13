@@ -1,6 +1,13 @@
 <?php
     include("auth_session_user.php");
     $userid=$_SESSION["userid"];
+
+    $user_agent = getenv("HTTP_USER_AGENT");
+    $nxt_page="download_bill";
+    if(strpos($user_agent, "Mac") !== FALSE){
+        $nxt_page .= "_mac";
+    }
+    // echo $nxt_page."<br>";
     
 ?>
 
@@ -147,7 +154,7 @@
                 echo "
                         <div class='col-sm text-center'>
                             <a href='review_bill.php?billid=$billid' class='text-danger bg-light pl-1 pr-1'> Review</a>
-                            <br><a href='download_bill.php?billid=$billid' target='_blank' class='text-danger bg-light pl-1 pr-1'> Download Invoice </a>
+                            <br><a href='$nxt_page.php?billid=$billid' target='_blank' class='text-danger bg-light pl-1 pr-1'> Download Invoice </a>
                         </div>
                 ";
             }
@@ -155,7 +162,8 @@
                 echo "
                         <div class='col-sm text-center'>
                             <a href='#' class='text-success bg-light pl-1 pr-1'> Already Reviewed</a>
-                            <br><a href='download_bill.php?billid=$billid' target='_blank' class='text-danger bg-light pl-1 pr-1'> Download Invoice </a>
+                            <br>
+                            <a href='$nxt_page.php?billid=$billid' target='_blank' class='text-danger bg-light pl-1 pr-1'> Download Invoice </a>
                         </div>
                 ";
             }
