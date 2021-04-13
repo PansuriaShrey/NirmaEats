@@ -85,6 +85,12 @@
                 $temp="UPDATE `reviewDish` SET `totalStar`=$totalStar,`totalReview`=$totalReview WHERE `dishId`=$dishid";
                 mysqli_query($conn,$temp);
             }
+
+            // Adding for RECOMMENDATION SYSTEM
+            $temp="INSERT INTO `reviewStash`(`id`, `userId`, `dishId`, `stars`, `billId`) 
+            VALUES ( NULL,$userid,$dishid,$stars,$billid)";
+            mysqli_query($conn,$temp);
+
         }
         // UPDATE `bill` SET `review`=1 WHERE billId=
         $temp="UPDATE `bill` SET `review`=1 WHERE billId=$billid";

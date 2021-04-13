@@ -2,9 +2,9 @@
     session_start();
     $con = mysqli_connect("localhost","root","","nirmaeats");
     if (mysqli_connect_errno()){
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        // // echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
-    echo "Connected Successfully";
+    // // echo "Connected Successfully";
 
 
     //variables
@@ -16,15 +16,15 @@
     $result_resType = mysqli_query($con, $query_resType);
     $rows = mysqli_num_rows($result_resType);
     if (mysqli_num_rows($result_resType) > 0){
-    	echo "IN";
-    	echo "<table border='1'>";
-    	echo "<tr>";
-	    	echo "<td>"."resId"."</td>";
-	    	echo "<td>"."resType"."</td>";
-	    	echo "<td>"."Beverage"."</td>";
-	    	echo "<td>"."Breakfast"."</td>";
-	    	echo "<td>"."Lunch"."</td>";
-	    	echo "<td>"."Dinner"."</td>";
+    	// echo "IN";
+    	// echo "<table border='1'>";
+    	// echo "<tr>";
+	    	// echo "<td>"."resId"."</td>";
+	    	// echo "<td>"."resType"."</td>";
+	    	// echo "<td>"."Beverage"."</td>";
+	    	// echo "<td>"."Breakfast"."</td>";
+	    	// echo "<td>"."Lunch"."</td>";
+	    	// echo "<td>"."Dinner"."</td>";
     while($row = mysqli_fetch_assoc($result_resType)) {
 
     				$arr[$row["resId"]] = array(
@@ -56,17 +56,17 @@
     					"avgReview"=>0,
     					"normalisedReview"=>0,
     				);
-                	echo "<tr>";
-                	echo "<td>".$row["resId"]."</td>";
-                	echo "<td>".$row["resType"]."</td>";
+                	// echo "<tr>";
+                	// echo "<td>".$row["resId"]."</td>";
+                	// echo "<td>".$row["resType"]."</td>";
                 	$Beverage = substr_count($row["resType"],"Beverage");
                 	$Breakfast = substr_count($row["resType"],"Breakfast");
                 	$Lunch = substr_count($row["resType"],"Lunch");
                 	$Dinner = substr_count($row["resType"],"Dinner");
-                	echo "<td>".$Beverage."</td>";
-			    	echo "<td>".$Breakfast."</td>";
-			    	echo "<td>".$Lunch."</td>";
-			    	echo "<td>".$Dinner."</td>";
+                	// echo "<td>".$Beverage."</td>";
+			    	// echo "<td>".$Breakfast."</td>";
+			    	// echo "<td>".$Lunch."</td>";
+			    	// echo "<td>".$Dinner."</td>";
 
 			    	$arr[$row["resId"]]["BeverageM"] = $Beverage;
 			    	$arr[$row["resId"]]["Breakfast"] = $Breakfast;
@@ -74,10 +74,10 @@
 			    	$arr[$row["resId"]]["Dinner"] = $Dinner;
                 	$r[] = 	$row["resId"];
                 }
-                echo "</table>";
+                // echo "</table>";
     }
     else{
-    	echo "Not working";
+    	// echo "Not working";
     }
 
     //-----------------Count number of orders from all restaurants by dishtype-------------------
@@ -86,23 +86,23 @@
 	$result_JOIN = mysqli_query($con, $query_JOIN); 
 	$rows = mysqli_num_rows($result_JOIN);
     if (mysqli_num_rows($result_JOIN) > 0){
-    	echo "IN";
-    	echo "<table border='1'>";
-    	echo "<tr>";
-                	echo "<td>"."resId"."</td>";
-                	echo "<td>"."dishType"."</td>";
-                	echo "<td>"."sumDish"."</td>";
+    	// echo "IN";
+    	// echo "<table border='1'>";
+    	// echo "<tr>";
+                	// echo "<td>"."resId"."</td>";
+                	// echo "<td>"."dishType"."</td>";
+                	// echo "<td>"."sumDish"."</td>";
     while($row = mysqli_fetch_assoc($result_JOIN)) {
-                	echo "<tr>";
-                	echo "<td>".$row["resId"]."</td>";
-                	echo "<td>".$row["dishType"]."</td>";
-                	echo "<td>".$row["sumDish"]."</td>";
+                	// echo "<tr>";
+                	// echo "<td>".$row["resId"]."</td>";
+                	// echo "<td>".$row["dishType"]."</td>";
+                	// echo "<td>".$row["sumDish"]."</td>";
                 	$arr[$row["resId"]][$row["dishType"]] = $row["sumDish"];
                 }
-                echo "</table>";
+                // echo "</table>";
     }
     else{
-    	echo "Not working";
+    	// echo "Not working";
     }
 
     //-----------------Count number of orders from all restaurants by dishtype-------------------
@@ -111,21 +111,21 @@
 	$result_JOIN_res = mysqli_query($con, $query_JOIN_res); 
 	$rows = mysqli_num_rows($result_JOIN_res);
     if (mysqli_num_rows($result_JOIN_res) > 0){
-    	echo "IN";
-    	echo "<table border='1'>";
-    	echo "<tr>";
-                	echo "<td>"."resId"."</td>";
-                	echo "<td>"."sumDish"."</td>";
+    	// echo "IN";
+    	// echo "<table border='1'>";
+    	// echo "<tr>";
+                	// echo "<td>"."resId"."</td>";
+                	// echo "<td>"."sumDish"."</td>";
     while($row = mysqli_fetch_assoc($result_JOIN_res)) {
-                	echo "<tr>";
-                	echo "<td>".$row["resId"]."</td>";
-                	echo "<td>".$row["sumDish"]."</td>";
+                	// echo "<tr>";
+                	// echo "<td>".$row["resId"]."</td>";
+                	// echo "<td>".$row["sumDish"]."</td>";
                 	$arr[$row["resId"]]["totalOrders"] = $row["sumDish"];
                 }
-                echo "</table>";
+                // echo "</table>";
     }
     else{
-    	echo "Not working";
+    	// echo "Not working";
     }
 
     //-------------------------------------Average Dish Price------------------------------------
@@ -134,21 +134,21 @@
 	$result_avgDishPrice = mysqli_query($con, $query_avgDishPrice); 
 	$rows = mysqli_num_rows($result_avgDishPrice);
     if (mysqli_num_rows($result_avgDishPrice) > 0){
-    	echo "IN";
-    	echo "<table border='1'>";
-    	echo "<tr>";
-                	echo "<td>"."resId"."</td>";
-                	echo "<td>"."avgDishPrice"."</td>";
+    	// echo "IN";
+    	// echo "<table border='1'>";
+    	// echo "<tr>";
+                	// echo "<td>"."resId"."</td>";
+                	// echo "<td>"."avgDishPrice"."</td>";
     while($row = mysqli_fetch_assoc($result_avgDishPrice)) {
-                	echo "<tr>";
-                	echo "<td>".$row["resId"]."</td>";
-                	echo "<td>".$row["avgDishPrice"]."</td>";
+                	// echo "<tr>";
+                	// echo "<td>".$row["resId"]."</td>";
+                	// echo "<td>".$row["avgDishPrice"]."</td>";
                 	$arr[$row["resId"]]["avgDishPrice"] = $row["avgDishPrice"];	
                 }
-                echo "</table>";
+                // echo "</table>";
     }
     else{
-    	echo "Not working";
+    	// echo "Not working";
     }
 
     //-------------------------------------Average reviews and Total reviews---------------------------------
@@ -158,69 +158,69 @@
 	$result_reviews = mysqli_query($con, $query_reviews); 
 	$rows = mysqli_num_rows($result_reviews);
     if (mysqli_num_rows($result_reviews) > 0){
-    	echo "IN";
-    	echo "<table border='1'>";
-    	echo "<tr>";
-                	echo "<td>"."resId"."</td>";
-                	echo "<td>"."totalStars"."</td>";
-                	echo "<td>"."totalReview"."</td>";
+    	// echo "IN";
+    	// echo "<table border='1'>";
+    	// echo "<tr>";
+                	// echo "<td>"."resId"."</td>";
+                	// echo "<td>"."totalStars"."</td>";
+                	// echo "<td>"."totalReview"."</td>";
     while($row = mysqli_fetch_assoc($result_reviews)) {
-                	echo "<tr>";
-                	echo "<td>".$row["resId"]."</td>";
-                	echo "<td>".$row["totalStars"]."</td>";
-                	echo "<td>".$row["totalReview"]."</td>";
+                	// echo "<tr>";
+                	// echo "<td>".$row["resId"]."</td>";
+                	// echo "<td>".$row["totalStars"]."</td>";
+                	// echo "<td>".$row["totalReview"]."</td>";
                 	$arr[$row["resId"]]["totalStars"] = $row["totalStars"];
                 	$arr[$row["resId"]]["totalReview"] = $row["totalReview"];
                 	$arr[$row["resId"]]["avgReview"] = $row["totalStars"]/$row["totalReview"];
                 	$arr[$row["resId"]]["normalisedReview"] = 0.5*($arr[$row["resId"]]["avgReview"]) + 2.5*(1 - exp(-$row["totalReview"]/$reviewThreshold));
 
                 }
-                echo "</table>";
+                // echo "</table>";
     }
     else{
-    	echo "Not working";
+    	// echo "Not working";
     }
 
 
 //----------------------------------------------------------------------------------------------
-    echo "<table border=1>";
-    echo "<tr>";
-    echo "<td>"."resId"."</td>";
-    echo "<td>"."BeverageM"."</td>";
-    echo "<td>"."Breakfast"."</td>";
-    echo "<td>"."Lunch"."</td>";
-    echo "<td>"."Dinner"."</td>";
-    echo "<td>"."Dosa"."</td>";
-    echo "<td>"."Salad"."</td>";
-    echo "<td>"."Starter"."</td>";
-    echo "<td>"."Vegetable"."</td>";
-    echo "<td>"."Soup"."</td>";
-    echo "<td>"."Snack"."</td>";
-    echo "<td>"."Bread"."</td>";
-    echo "<td>"."Noodles"."</td>";
-    echo "<td>"."Rice & Biryani"."</td>";
-    echo "<td>"."Pulse"."</td>";
-    echo "<td>"."Beverage"."</td>";
-    echo "<td>"."Drink"."</td>";
-    echo "<td>"."Dessert"."</td>";
-    echo "<td>"."totalOrders"."</td>";
-    echo "<td>"."avgDishPrice"."</td>";
-    echo "<td>"."totalStars"."</td>";
-    echo "<td>"."totalReview"."</td>";
-    echo "<td>"."avgReview"."</td>";
-    echo "<td>"."normlisedReview"."</td>";
-    echo "</tr>";
+    // echo "<table border=1>";
+    // echo "<tr>";
+    // echo "<td>"."resId"."</td>";
+    // echo "<td>"."BeverageM"."</td>";
+    // echo "<td>"."Breakfast"."</td>";
+    // echo "<td>"."Lunch"."</td>";
+    // echo "<td>"."Dinner"."</td>";
+    // echo "<td>"."Dosa"."</td>";
+    // echo "<td>"."Salad"."</td>";
+    // echo "<td>"."Starter"."</td>";
+    // echo "<td>"."Vegetable"."</td>";
+    // echo "<td>"."Soup"."</td>";
+    // echo "<td>"."Snack"."</td>";
+    // echo "<td>"."Bread"."</td>";
+    // echo "<td>"."Noodles"."</td>";
+    // echo "<td>"."Rice & Biryani"."</td>";
+    // echo "<td>"."Pulse"."</td>";
+    // echo "<td>"."Beverage"."</td>";
+    // echo "<td>"."Drink"."</td>";
+    // echo "<td>"."Dessert"."</td>";
+    // echo "<td>"."totalOrders"."</td>";
+    // echo "<td>"."avgDishPrice"."</td>";
+    // echo "<td>"."totalStars"."</td>";
+    // echo "<td>"."totalReview"."</td>";
+    // echo "<td>"."avgReview"."</td>";
+    // echo "<td>"."normlisedReview"."</td>";
+    // echo "</tr>";
 
     foreach($arr as $x => $val) {
-    	echo "<tr>";
-    	echo "<td>"."$x"."</td>";
+    	// echo "<tr>";
+    	// echo "<td>"."$x"."</td>";
 		foreach($val as $y => $y_val) {
-  			echo "<td>"."$y_val"."</td>";
+  			// echo "<td>"."$y_val"."</td>";
 		}
-		echo "</tr>";
+		// echo "</tr>";
 
 	}
-	echo "</table>";
+	// echo "</table>";
 
 	//----------------------------------Exhaustive user list------------------------------------------
     
@@ -230,10 +230,10 @@
     $result_userType = mysqli_query($con, $query_userType);
     $rows = mysqli_num_rows($result_userType);
     if (mysqli_num_rows($result_userType) > 0){
-    	echo "IN";
-    	echo "<table border='1'>";
-    	echo "<tr>";
-	    	echo "<td>"."userId"."</td>";
+    	// echo "IN";
+    	// echo "<table border='1'>";
+    	// echo "<tr>";
+	    	// echo "<td>"."userId"."</td>";
     while($row = mysqli_fetch_assoc($result_userType)) {
     				//-----array for order percentage
     				$arr_u[$row["userId"]] = array(
@@ -279,13 +279,13 @@
     					//--reviews
     					$res = array_fill_keys(array_keys($arr),0)
     				);
-                	echo "<tr>";
-                	echo "<td>".$row["userId"]."</td>";
+                	// echo "<tr>";
+                	// echo "<td>".$row["userId"]."</td>";
                 }
-                echo "</table>";
+                // echo "</table>";
     }
     else{
-    	echo "Not working";
+    	// echo "Not working";
     }
 
 	//----------------------------------------------------Average Dish Price by User------------------------------------------    
@@ -294,17 +294,17 @@
 	$result_avgDishPriceUser = mysqli_query($con, $query_avgDishPriceUser); 
 	$rows = mysqli_num_rows($result_avgDishPriceUser);
     if (mysqli_num_rows($result_avgDishPriceUser) > 0){
-    	echo "IN";
-    	echo "<table border='1'>";
-    	echo "<tr>";
-                	echo "<td>"."userId"."</td>";
-                	echo "<td>"."totalQuantity"."</td>";
-                	echo "<td>"."totalPay"."</td>";
+    	// echo "IN";
+    	// echo "<table border='1'>";
+    	// echo "<tr>";
+                	// echo "<td>"."userId"."</td>";
+                	// echo "<td>"."totalQuantity"."</td>";
+                	// echo "<td>"."totalPay"."</td>";
     while($row = mysqli_fetch_assoc($result_avgDishPriceUser)) {
-                	echo "<tr>";
-                	echo "<td>".$row["userId"]."</td>";
-                	echo "<td>".$row["totalQuantity"]."</td>";
-                	echo "<td>".$row["TotalPay"]."</td>";
+                	// echo "<tr>";
+                	// echo "<td>".$row["userId"]."</td>";
+                	// echo "<td>".$row["totalQuantity"]."</td>";
+                	// echo "<td>".$row["TotalPay"]."</td>";
                 	if($row["totalQuantity"]!=0)
                 	{
                 		$arr_u[$row["userId"]]["AverageSpent"] = ($row["TotalPay"]/$row["totalQuantity"]);
@@ -319,7 +319,7 @@
             		$arr_u[$row["userId"]]["TotalOrders"] = $row["totalQuantity"];
                 }
                 
-                echo "</table>";
+                // echo "</table>";
 
 				//----------------------------------               
 
@@ -332,7 +332,7 @@
     }
 }
     else{
-    	echo "Not working";
+    	// echo "Not working";
     }
 
 	//-----------------User Orders By restaurant Type------------------------------------------------------------------
@@ -341,24 +341,24 @@
 	$result_userRes = mysqli_query($con, $query_userRes); 
 	$rows = mysqli_num_rows($result_userRes);
     if (mysqli_num_rows($result_userRes) > 0){
-    	echo "IN";
-    	echo "<table border='1'>";
-    	echo "<tr>";
-                	echo "<td>"."userId"."</td>";
-                	echo "<td>"."resId"."</td>";
-                	echo "<td>"."resSum"."</td>";
+    	// echo "IN";
+    	// echo "<table border='1'>";
+    	// echo "<tr>";
+                	// echo "<td>"."userId"."</td>";
+                	// echo "<td>"."resId"."</td>";
+                	// echo "<td>"."resSum"."</td>";
     while($row = mysqli_fetch_assoc($result_userRes)) {
-                	echo "<tr>";
-                	echo "<td>".$row["userId"]."</td>";
-                	echo "<td>".$row["resId"]."</td>";
-                	echo "<td>".$row["resSum"]."</td>";
+                	// echo "<tr>";
+                	// echo "<td>".$row["userId"]."</td>";
+                	// echo "<td>".$row["resId"]."</td>";
+                	// echo "<td>".$row["resSum"]."</td>";
                 	$arr_u[$row["userId"]][0][$row["resId"]] = $row["resSum"];
                 	$arr_ur[$row["userId"]][0][$row["resId"]] = $row["resSum"];
                 }
-                echo "</table>";
+                // echo "</table>";
     }
     else{
-    	echo "Not working";
+    	// echo "Not working";
     }
 
     //-----------------Count number of orders from all users by dishtype-------------------
@@ -367,24 +367,24 @@
 	$result_uJOIN = mysqli_query($con, $query_uJOIN); 
 	$rows = mysqli_num_rows($result_uJOIN);
     if (mysqli_num_rows($result_uJOIN) > 0){
-    	echo "IN";
-    	echo "<table border='1'>";
-    	echo "<tr>";
-                	echo "<td>"."userId"."</td>";
-                	echo "<td>"."dishType"."</td>";
-                	echo "<td>"."sumDish"."</td>";
+    	// echo "IN";
+    	// echo "<table border='1'>";
+    	// echo "<tr>";
+                	// echo "<td>"."userId"."</td>";
+                	// echo "<td>"."dishType"."</td>";
+                	// echo "<td>"."sumDish"."</td>";
     while($row = mysqli_fetch_assoc($result_uJOIN)) {
-                	echo "<tr>";
-                	echo "<td>".$row["userId"]."</td>";
-                	echo "<td>".$row["dishType"]."</td>";
-                	echo "<td>".$row["sumDish"]."</td>";
+                	// echo "<tr>";
+                	// echo "<td>".$row["userId"]."</td>";
+                	// echo "<td>".$row["dishType"]."</td>";
+                	// echo "<td>".$row["sumDish"]."</td>";
                 	$arr_u[$row["userId"]][$row["dishType"]] = $row["sumDish"]/$arr_u[$row["userId"]]["TotalOrders"];
-                	//echo $arr[$row["userId"]][$row["dishType"]];
+                	//// echo $arr[$row["userId"]][$row["dishType"]];
                 }
-                echo "</table>";
+                // echo "</table>";
     }
     else{
-    	echo "Not working";
+    	// echo "Not working";
     }
 
     //---------------------------------------reviews by user and dish type----------------------------------------------------
@@ -393,115 +393,115 @@
 	$result_uJOINreview = mysqli_query($con, $query_uJOINreview); 
 	$rows = mysqli_num_rows($result_uJOINreview);
     if (mysqli_num_rows($result_uJOINreview) >= 0){
-    	echo "IN";
-    	echo "<table border='1'>";
-    	echo "<tr>";
-                	echo "<td>"."userId"."</td>";
-                	echo "<td>"."dishType"."</td>";
-                	echo "<td>"."avgStars"."</td>";
+    	// echo "IN";
+    	// echo "<table border='1'>";
+    	// echo "<tr>";
+                	// echo "<td>"."userId"."</td>";
+                	// echo "<td>"."dishType"."</td>";
+                	// echo "<td>"."avgStars"."</td>";
     while($row = mysqli_fetch_assoc($result_uJOINreview)) {
-                	echo "<tr>";
-                	echo "<td>".$row["userId"]."</td>";
-                	echo "<td>".$row["dishType"]."</td>";
-                	echo "<td>".$row["avgStars"]."</td>";
+                	// echo "<tr>";
+                	// echo "<td>".$row["userId"]."</td>";
+                	// echo "<td>".$row["dishType"]."</td>";
+                	// echo "<td>".$row["avgStars"]."</td>";
                 	$arr_ur[$row["userId"]][$row["dishType"]] = $row["avgStars"];
-                	//echo $arr[$row["userId"]][$row["dishType"]];
+                	//// echo $arr[$row["userId"]][$row["dishType"]];
                 }
-                echo "</table>";
+                // echo "</table>";
     }
     else{
-    	echo "Not working";
+    	// echo "Not working";
     }
 
     //------------------------------------------------------------------------------------------------
 
-    echo "<table border=1>";
-    echo "<tr>";
-    echo "<td>"."userId"."</td>";
-    echo "<td>"."Dosa"."</td>";
-    echo "<td>"."Salad"."</td>";
-    echo "<td>"."Starter"."</td>";
-    echo "<td>"."Vegetable"."</td>";
-    echo "<td>"."Soup"."</td>";
-    echo "<td>"."Snack"."</td>";
-    echo "<td>"."Bread"."</td>";
-    echo "<td>"."Noodles"."</td>";
-    echo "<td>"."Rice & Biryani"."</td>";
-    echo "<td>"."Pulse"."</td>";
-    echo "<td>"."Beverage"."</td>";
-    echo "<td>"."Drink"."</td>";
-    echo "<td>"."Dessert"."</td>";
-    echo "<td>"."AverageSpent"."</td>";
+    // echo "<table border=1>";
+    // echo "<tr>";
+    // echo "<td>"."userId"."</td>";
+    // echo "<td>"."Dosa"."</td>";
+    // echo "<td>"."Salad"."</td>";
+    // echo "<td>"."Starter"."</td>";
+    // echo "<td>"."Vegetable"."</td>";
+    // echo "<td>"."Soup"."</td>";
+    // echo "<td>"."Snack"."</td>";
+    // echo "<td>"."Bread"."</td>";
+    // echo "<td>"."Noodles"."</td>";
+    // echo "<td>"."Rice & Biryani"."</td>";
+    // echo "<td>"."Pulse"."</td>";
+    // echo "<td>"."Beverage"."</td>";
+    // echo "<td>"."Drink"."</td>";
+    // echo "<td>"."Dessert"."</td>";
+    // echo "<td>"."AverageSpent"."</td>";
 
 
     foreach($arr_u[1][0] as $x => $val){
-    	echo "<td>"."resId = "."$x"."</td>";
+    	// echo "<td>"."resId = "."$x"."</td>";
     }
-    echo "<td>"."TotalOrders"."</td>";
+    // echo "<td>"."TotalOrders"."</td>";
     foreach($arr_u as $x => $val) {
-    	echo "<tr>";
-    	echo "<td>"."$x"."</td>";
+    	// echo "<tr>";
+    	// echo "<td>"."$x"."</td>";
 		foreach($val as $y => $y_val) {
 			if(gettype($y_val)!="array"){
-				echo "<td>"."$y_val"."</td>";
+				// echo "<td>"."$y_val"."</td>";
 			}
 			else
 			{
 				foreach($y_val as $y_val_x => $y_val_value)
 				{
-					echo "<td>"."$y_val_value"."</td>";
+					// echo "<td>"."$y_val_value"."</td>";
 				}
 			}
   			
 		}
-		echo "</tr>";
+		// echo "</tr>";
 
 	}
-	echo "</table>";
+	// echo "</table>";
 
 	//------------------------------------------------------------------------------------------------
 
-    echo "<table border=1>";
-    echo "<tr>";
-    echo "<td>"."userId"."</td>";
-    echo "<td>"."Dosa"."</td>";
-    echo "<td>"."Salad"."</td>";
-    echo "<td>"."Starter"."</td>";
-    echo "<td>"."Vegetable"."</td>";
-    echo "<td>"."Soup"."</td>";
-    echo "<td>"."Snack"."</td>";
-    echo "<td>"."Bread"."</td>";
-    echo "<td>"."Noodles"."</td>";
-    echo "<td>"."Rice & Biryani"."</td>";
-    echo "<td>"."Pulse"."</td>";
-    echo "<td>"."Beverage"."</td>";
-    echo "<td>"."Drink"."</td>";
-    echo "<td>"."Dessert"."</td>";
+    // echo "<table border=1>";
+    // echo "<tr>";
+    // echo "<td>"."userId"."</td>";
+    // echo "<td>"."Dosa"."</td>";
+    // echo "<td>"."Salad"."</td>";
+    // echo "<td>"."Starter"."</td>";
+    // echo "<td>"."Vegetable"."</td>";
+    // echo "<td>"."Soup"."</td>";
+    // echo "<td>"."Snack"."</td>";
+    // echo "<td>"."Bread"."</td>";
+    // echo "<td>"."Noodles"."</td>";
+    // echo "<td>"."Rice & Biryani"."</td>";
+    // echo "<td>"."Pulse"."</td>";
+    // echo "<td>"."Beverage"."</td>";
+    // echo "<td>"."Drink"."</td>";
+    // echo "<td>"."Dessert"."</td>";
 
 
     foreach($arr_ur[1][0] as $x => $val){
-    	echo "<td>"."resId = "."$x"."</td>";
+    	// echo "<td>"."resId = "."$x"."</td>";
     }
     foreach($arr_ur as $x => $val) {
-    	echo "<tr>";
-    	echo "<td>"."$x"."</td>";
+    	// echo "<tr>";
+    	// echo "<td>"."$x"."</td>";
 		foreach($val as $y => $y_val) {
 			if(gettype($y_val)!="array"){
-				echo "<td>"."$y_val"."</td>";
+				// echo "<td>"."$y_val"."</td>";
 			}
 			else
 			{
 				foreach($y_val as $y_val_x => $y_val_value)
 				{
-					echo "<td>"."$y_val_value"."</td>";
+					// echo "<td>"."$y_val_value"."</td>";
 				}
 			}
   			
 		}
-		echo "</tr>";
+		// echo "</tr>";
 
 	}
-	echo "</table>";
+	// echo "</table>";
 
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
@@ -526,8 +526,8 @@
 				}
 				$dist = $dist/$count;
 				$dist = $dist**(1/2);
-				//echo $dist;
-				//echo "<br>";
+				//// echo $dist;
+				//// echo "<br>";
 				$distances[$x] = $dist;
 			}
 
@@ -539,10 +539,10 @@
     $k = 3;
     $userId = 5;
     if(isset($_SESSION["userid"])){
-        echo $userId;
+        // echo $userId;
         $userId = $_SESSION["userid"];
     }
-    echo $userId;
+    // echo $userId;
     $recommended_restaurants = array();
 
     if($arr_u[$userId]["TotalOrders"]<10){
@@ -552,15 +552,15 @@
         }
         arsort($recommended_restaurants);
         $recommended_restaurants = array_keys($recommended_restaurants);
-        print_r($recommended_restaurants);
+        // print_r($recommended_restaurants);
         
     }
     else{
 
         $distances_1 = KNN($arr_u,$userId,$k);
         /*foreach($distances_1 as $x => $x_val){
-                echo $x;
-                echo "<br>";
+                // echo $x;
+                // echo "<br>";
             }*/
         $count = 0;
         $answer = array();
@@ -581,17 +581,17 @@
             }
                 $count = $count + 1;
         }
-        /*echo "<br>";
+        /*// echo "<br>";
         foreach($answer as $x => $x_val){
-            echo $x."->".$x_val;
-            echo "<br>";
+            // echo $x."->".$x_val;
+            // echo "<br>";
         }*/
         
 
         $distances_2 = KNN($arr_ur,$userId,$k);
         /*foreach($distances_2 as $x => $x_val){
-                echo $x;
-                echo "<br>";
+                // echo $x;
+                // echo "<br>";
             }*/
         $count = 0;
         foreach($distances_2 as $x => $x_val){
@@ -613,13 +613,13 @@
 
         arsort($answer);
        
-        /*echo "<br>";
+        /*// echo "<br>";
     	foreach($answer as $x => $x_val){
-    		echo $x."->".$x_val;
-    		echo "<br>";
+    		// echo $x."->".$x_val;
+    		// echo "<br>";
     	}*/
 
         $recommended_restaurants = array_keys($answer);
-        print_r($recommended_restaurants);
+        // print_r($recommended_restaurants);
     }
 ?>

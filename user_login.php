@@ -54,10 +54,13 @@
     $sql.="SELECT * FROM `restaurant` ";
 
     $result=mysqli_query($conn,$sql);
+    $val="Not Searched";
 
     if(isset($_GET["getdish"])){
-        $dishname=$_GET["getdish"];
-        $sql="SELECT * FROM `dish` WHERE `dishName` LIKE '%$dishname%'";
+        $search=$_GET["getdish"];
+
+        // Checking with dish names
+        $sql="SELECT * FROM `dish` WHERE `dishName` LIKE '%$search%'";
         $dishes=mysqli_query($conn,$sql);
         $restaurant_serving_dishes=array();
         $str="resId = 0 ";
@@ -66,8 +69,20 @@
             array_push($restaurant_serving_dishes,$resid);
             $str.="OR resId = $resid ";
         }
+
+        // checking with restaurant names
+        $sql="SELECT * FROM `restaurant` WHERE `resName` LIKE '%$search%'";
+        $dishes=mysqli_query($conn,$sql);
+        $restaurant_serving_dishes=array();
+        while($row = mysqli_fetch_assoc($dishes)){
+            $resid=$row["resId"];
+            array_push($restaurant_serving_dishes,$resid);
+            $str.="OR resId = $resid ";
+        }
+
         $sql="SELECT * FROM `restaurant` WHERE ".$str;
         $result=mysqli_query($conn,$sql);
+        $val="Searched";
     }
 
 ?>
@@ -184,7 +199,14 @@
 
     <?php
         include("printRestaurant.php");
-        printRestaurantSecond($result);
+
+        if($val=="Searched"){
+            printRestaurantSecond($result);
+        }
+        else{
+            include("recommendation_system.php");
+            printRestaurantThird($recommended_restaurants,$conn);
+        }
     ?>
 
 

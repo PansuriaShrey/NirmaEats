@@ -160,4 +160,56 @@
         ";
     }
 
+    function printRestaurantThird($restaurantList,$conn){
+
+        echo "
+            <main class='page projects-page'>
+            <section class='portfolio-block projects-cards pt-3 mt-3 pb-0'>
+                <div class='container mt-0 mb-2'>
+                    <div class='heading mb-3'>
+                        <h2>RESTAURANTS</h2>
+                    </div>
+                    <div class='row d-flex justify-content-center'>
+        ";
+
+        foreach($restaurantList as $ele){
+
+            $sql="SELECT * FROM `restaurant` WHERE `resId` = $ele";
+            $result = mysqli_query($conn,$sql);
+
+            $row = mysqli_fetch_assoc($result);
+            $rid=$row["resId"];
+            $rname=$row["resName"];
+            $remail=$row["resEmailId"];
+            $raddress=$row["resAddress"];
+            $rtype=$row["resType"];
+            $rpic=$row["resPicture"];
+            $rot=$row["resOpeningTime"];
+            $rct=$row["resClosingTime"];
+
+            echo "
+                <div class='col-md-6 col-lg-4'>
+                    <div class='card border-0'><a href='#'><img class='card-img-top scale-on-hover' src='assets/images/$rpic' alt='Card Image' style='height:280px;width:100%;'></a>
+                        <div class='card-body'>
+                            <h6 >
+                                <a href='restaurant_dishes.php?resid=$rid&dishid=0' onclick='' style='color:#0ea0ff;'>
+                                $rname
+                                </a>
+                            </h6>
+                            <p class='text-muted card-text mb-1'>Address : $raddress</p>
+                            <p class='text-muted card-text mb-1'>Email ID : $remail</p>
+                            <p class='text-muted card-text'>Timing : $rot To $rct</p>
+                        </div>
+                    </div>
+                </div>
+            ";
+        }
+        echo "
+                        </div>
+                    </div>
+                </section>
+            </main>
+        ";
+    }
+
 ?>
