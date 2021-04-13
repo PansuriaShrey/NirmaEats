@@ -12,19 +12,7 @@
 ?>
 
 <?php
-
-    // Getting USER Info.
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname="NirmaEats";
-
-    $conn = mysqli_connect($servername, $username, $password,$dbname);
-    if(!$conn){
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    // echo "<center class='text-light'>Connected successfully with Database</center><br>";
+    include('db.php');
 
     $sql="SELECT * FROM `user` WHERE `userId` = ";
     $sql.=$userid;

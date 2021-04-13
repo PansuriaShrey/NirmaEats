@@ -3,16 +3,7 @@
     include("auth_session_user.php");
     $userid=$_SESSION["userid"];
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname="NirmaEats";
-
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    if(!$conn){
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    // echo "<center class='text-dark'>Connected successfully with Database</center><br>";
+    include('db.php');
 
     $tempsql="SELECT * FROM `cart` WHERE `userId` = ";
     $tempsql.=$userid;

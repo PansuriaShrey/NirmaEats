@@ -5,16 +5,8 @@
 
 <?php
 
-    // Database Connectivity
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname="NirmaEats";
+    include('db.php');
 
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    if(!$conn){
-        die("Connection failed: " . mysqli_connect_error());
-    }
     // echo "<center class='text-dark'>Connected successfully with Database</center><br>";
 
     $sql="SELECT * FROM `user` WHERE `userId` = ";
@@ -178,9 +170,9 @@ if ( window.history.replaceState ) {
 
 function SubmitForm()
 {
-     document.pord.action='./bill_invoice.php';
-     document.pord.target='_blank';
-     document.pord.submit();
+    //  document.pord.action='./bill_invoice.php';
+    //  document.pord.target='_blank';
+    //  document.pord.submit();
 
      document.pord.action='./proceed.php';
      document.pord.target='';
