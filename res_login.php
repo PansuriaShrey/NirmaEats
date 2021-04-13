@@ -137,6 +137,9 @@
                 <a class="nav-link" href="res_login.php">Dashboard<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
+                <a class="nav-link" href="res_order.php">My Orders</a>
+                </li>
+                <li class="nav-item">
                 <a class="nav-link" href="res_profile.php">My Profile</a>
                 </li>
                 <li class="nav-item">

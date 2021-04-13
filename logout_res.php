@@ -49,13 +49,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item ">
-                <a class="nav-link" href="res_login.php">
-                    <?php echo "$name" ?>
-                </a>
+                <li class="nav-item">
+                <a class="nav-link" href="res_login.php"><?php echo "$name" ?></a>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item">
                 <a class="nav-link" href="res_login.php">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="res_order.php">My Orders</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="res_profile.php">My Profile</a>
