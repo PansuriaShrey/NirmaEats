@@ -34,8 +34,8 @@
         $total+=$curr;
     }
 
-    // SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = "NirmaEats" AND TABLE_NAME = "bill";
-    $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"NirmaEats\" AND TABLE_NAME = \"bill\";";
+    // SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = "$dbname" AND TABLE_NAME = "bill";
+    $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"$dbname\" AND TABLE_NAME = \"bill\";";
     $next_bill_id=mysqli_query($conn,$tempsql);
     $next_bill_id=mysqli_fetch_assoc($next_bill_id)["AUTO_INCREMENT"];
 

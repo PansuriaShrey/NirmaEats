@@ -54,7 +54,7 @@
         // Image File Location
         // $resPicture = $_REQUEST['resPicture'];
         $uploaddir="./assets/images/";
-        $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"NirmaEats\" AND TABLE_NAME = \"restaurant\";";
+        $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"$dbname\" AND TABLE_NAME = \"restaurant\";";
         $next_res_id=mysqli_query($con,$tempsql);
         $next_res_id=mysqli_fetch_assoc($next_res_id)["AUTO_INCREMENT"];
         $getend=$_FILES['resPicture']['name'];

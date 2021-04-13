@@ -209,7 +209,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             // code for storing image
             $dishPicture = $_FILES["dishPicture"];
             $fileDir = "./assets/images/";
-            $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"NirmaEats\" AND TABLE_NAME = \"dish\";";
+            $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"$dbname\" AND TABLE_NAME = \"dish\";";
             $next_dish_id=mysqli_query($conn,$tempsql);
             $next_dish_id=mysqli_fetch_assoc($next_dish_id)["AUTO_INCREMENT"];
             $fileName = "dish"."$next_dish_id";
@@ -392,7 +392,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         if(!empty($dishPictureNew)) {
             
             $fileDir = "./assets/images/";
-            // $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"NirmaEats\" AND TABLE_NAME = \"dish\";";
+            // $tempsql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"$dbname\" AND TABLE_NAME = \"dish\";";
             // $next_dish_id=mysqli_query($conn,$tempsql);
             // $next_dish_id=mysqli_fetch_assoc($next_dish_id)["AUTO_INCREMENT"];
             // $fileName = "dish"."$next_dish_id";

@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    // session_start();
     include('db.php');
 
 
@@ -565,7 +565,7 @@
                 break;
             }
             foreach($arr_u[$x][0] as $y => $y_val){
-                if($answer[$y]==NULL)
+                if(!array_key_exists($y,$answer))
                 {
                     $answer[$y] = $y_val;
                 }
