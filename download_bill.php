@@ -1,6 +1,15 @@
 <?php
-    include("auth_session_user.php");
-    $userid=$_SESSION["userid"];
+    session_start();
+    if(isset($_SESSION["resid"])) {
+        include("auth_session_res.php");
+    }
+    else if(isset($_SESSION["userid"])) {
+        include("auth_session_user.php");
+    }
+    else {
+        include("auth_session_user.php");
+    }
+    
     $billid=$_GET["billid"];
 ?>
 
