@@ -95,6 +95,14 @@
     <link rel="stylesheet" href="assets/assets2/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <style>
+    .not-active {
+        color: rgba(255, 255, 255, 0.55)!important;
+    }
+    .not-active:hover {
+        color: rgba(255, 255, 255, 0.75)!important;
+    }
+    </style>
 </head>
 
 <body>
@@ -107,8 +115,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item ">
-                <a class="nav-link" href="user_login.php">
+                <li class="nav-item">
+                <a class="nav-link not-active" href="user_login.php">
                     <?php echo "Hello, $name" ?>
                 </a>
                 </li>
@@ -116,16 +124,16 @@
                 <a class="nav-link" href="user_login.php">Dashboard<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="profile.php">My Profile</a>
+                <a class="nav-link not-active" href="profile.php">My Profile</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="myorder.php">My Orders</a>
+                <a class="nav-link not-active" href="myorder.php">My Orders</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="cart.php">Cart</a>
+                <a class="nav-link not-active" href="cart.php">Cart</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="logout.php">Log Out</a>
+                <a class="nav-link not-active" href="logout.php">Log Out</a>
                 </li>
             </ul>
         </div>
