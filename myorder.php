@@ -211,7 +211,7 @@
                     ";
                 }
                 echo "
-                    <div class='col-md-3 col-sm-6 item text-dark'>
+                    <div class='col-md-3 col-sm-6 item text-dark mb-3 mr-2 ml-2'>
                         <div class='card item-card card-block'>
                         <img src='assets/images/$dishpic' class='img2' alt='Photo of sunset'>
                         <table class='table text-center mt-1 mb-0'>

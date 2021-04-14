@@ -1,5 +1,6 @@
 <?php
-    include("auth_session_user.php");
+    // include("auth_session_user.php");
+    session_start();
     $userid=$_SESSION["userid"];
     $billid=$_GET["billid"];
 ?>

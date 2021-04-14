@@ -69,7 +69,7 @@
     </div> -->
 
     <div class="has-animation animation-ltr" data-delay="10">
-        <h1 class="bigger text-light">Welcome to NirmaEats </h1>
+        <h1 class="bigger text-light" style="font-size: 45px;">Welcome to NirmaEats </h1>
     </div>
 
     <!-- <div class="container mt-0 mb-0 d-flex justify-content-center"> -->
@@ -123,6 +123,18 @@
 
       </div>
     </section><!-- End Counts Section -->
+
+    <!-- <footer>
+        <div class="footer-copyright">
+            <div class="container mt-2 mb-2">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p class="mb-1">Aakash Shah | Parth Shah | Shrey Pansuria | Shivam Ajudia </p>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </footer> -->
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

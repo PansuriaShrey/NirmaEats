@@ -208,7 +208,7 @@
             }
             if($v=="Veg"){
                 echo "
-                <div class='col-md-3 col-sm-6 item text-dark'>
+                <div class='col-md-3 col-sm-6 item text-dark mb-3 mr-2 ml-2'>
                     <div class='card item-card card-block'>
                     <img src='assets/images/$dishpic' class='img2' alt='Photo of sunset'>
                     <h5 class='card-title  mt-3 mb-3 text-success'>$dishname</h5>
@@ -244,7 +244,7 @@
             }
             else{
                 echo "
-                <div class='col-md-3 col-sm-6 item text-dark'>
+                <div class='col-md-3 col-sm-6 item text-dark mb-3 mr-2 ml-2'>
                     <div class='card item-card card-block'>
                     <img src='assets/images/$dishpic' class='img2' alt='Photo of sunset'>
                     <h5 class='card-title  mt-3 mb-3 text-danger'>$dishname</h5>
