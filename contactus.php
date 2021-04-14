@@ -1,12 +1,33 @@
 <?php
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "
-    <script>
-        alert('Thank you for your valuable feedback.');
-        window.location = './';
-    </script>
-    ";
+    include('db.php');
+
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+        $fname = htmlspecialchars($_POST["fname"]);
+        $lname = htmlspecialchars($_POST["lname"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $comment = htmlspecialchars($_POST["comment"]);
+
+        $query = "INSERT INTO `contactus`
+        (`fname`, `lname`, `emailId`, `comment`)
+        VALUES ('$fname', '$lname', '$email', '$comment')";
+
+        $message = "";
+        if(mysqli_query($conn, $query)) {
+            $message = "Thank you for your valuable feedback.";
+        }
+        else {
+            $message = "Some error occured! Please give feedback again.";
+        }
+
+        echo "
+        <script>
+            alert('$message');
+            window.location = './';
+        </script>
+        ";
 }
 
 ?>
