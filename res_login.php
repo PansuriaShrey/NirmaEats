@@ -96,7 +96,7 @@
                 padding-left: 0;
             }
             .testimonials .testimonial-item {
-                padding: 30px;
+                padding: 10px;
                 margin: 15px;
             }
             .testimonials .testimonial-item .testimonial-img {
@@ -114,6 +114,7 @@
         @media (max-width: 990px) {
             .mydiv {
                 margin-left: 0%;
+                overflow: auto;
             }
         }
 
