@@ -30,6 +30,18 @@
         // echo "<center class='text-light'>".$_POST["quantity"]."</center><br>";
         $quantity=$_POST["quantity"];
 
+        if($quantity<0){
+            echo "<script>alert('You have ordered negative number of dishes')</script>";
+            echo "<script>window.location = './restaurant_dishes.php?resid=$resid&dishid=0'</script>";
+            exit;
+        }
+
+        if($quantity>10){
+            echo "<script>alert('We are unable to provide the service whose Qunatity ordered is more than 10.')</script>";
+            echo "<script>window.location = './restaurant_dishes.php?resid=$resid&dishid=0'</script>";
+            exit;
+        }
+
         // Get CartID
         $tempsql="SELECT * FROM `cart` WHERE `userId` = ";
         $tempsql.=$userid;
