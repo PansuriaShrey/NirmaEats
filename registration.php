@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Registration</title>
+    <link rel="icon" href="assets/images/icon2.jpeg" type="image/x-icon">
+    <title>Register</title>
     <link type = 'text/css' rel="stylesheet" href="assets/styles/login.css"/>
     <link type = 'text/css' rel="stylesheet" href="assets/styles/index.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>

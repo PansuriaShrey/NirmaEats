@@ -106,7 +106,7 @@
     <link href="assets/styles/myorder.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/styles.css">
     <link rel="stylesheet" href="assets/styles/index.css">
-    <title>My Orders</title>
+    <title>Review</title>
 </head>
 
 <body>

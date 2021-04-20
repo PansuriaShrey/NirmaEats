@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
+    <link rel="icon" href="assets/images/icon2.jpeg" type="image/x-icon">
     <title>Login</title>
     <link type = 'text/css' rel="stylesheet" href="assets/styles/login.css"/>
     <link type = 'text/css' rel="stylesheet" href="assets/styles/index.css"/>

@@ -66,7 +66,7 @@
     <link href="assets/styles/login_res.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/styles_res.css">
     <link rel="stylesheet" href="assets/styles/index.css">
-    <title>Home</title>
+    <title>Dashboard</title>
     <style>
         .cardbtn {
             text-decoration: none;
