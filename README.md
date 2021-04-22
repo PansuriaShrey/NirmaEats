@@ -46,7 +46,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-'NirmaEats' website connects you with a broad range of local restaurants around Nirma, so you can find your favourite food nearby whenever you want and can also view reviews of other people.
+'NirmaEats' website connects you with a broad range of local restaurants around Nirma, so you can find your favourite food nearby whenever you want. Not only that, the main page of your account shows you restaurants which are specialy picked for you based on your past orders and reviews. You can browse, order, review and download invoices.
 
 Here's why:
 * Your time should be focused on creating something amazing. A project that solves a problem and helps others
@@ -57,7 +57,7 @@ Here's why:
 
 *  [Bootstrap](https://getbootstrap.com)
 *  [PHP](https://www.php.net/)
-* [JS](https://www.javascript.com/)
+*  [JS](https://www.javascript.com/)
   
 
 <!-- GETTING STARTED -->
