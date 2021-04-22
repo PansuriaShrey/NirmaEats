@@ -46,7 +46,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-'NirmaEats' website connects you with a broad range of local restaurants around Nirma, so you can find your favourite food nearby whenever you want. Not only that, our state of the art recommendation system shows you restaurants which are specialy picked for you, based on your past orders and reviews. You can browse, order, review and download invoices among many other things.
+'NirmaEats' website connects you with a broad range of local restaurants around Nirma, so you can find your favourite food nearby whenever you want. Not only that, our state of the art recommendation system shows you restaurants which are specialy picked for you, based on your past orders and reviews. You can browse, order, review and download invoices among many other things. Please pay us a visit at http://nirmaeats.tech. 
 
 Here's why:
 * Your time should be focused on creating something amazing. A project that solves a problem and helps others
