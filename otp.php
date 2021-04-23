@@ -32,7 +32,7 @@
     $result = mysqli_query($con, $query);
     if($result) {
         $row=mysqli_fetch_assoc($result);
-        if($row["verifies"]==1){
+        if($row["verified"]==1){
             echo "<script type='text/javascript'>
             alert('Your account has already been verified :))');
             </script>";
@@ -77,7 +77,7 @@
         
 
         <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
-            <form class="form w-25" action="" method="post" name="personForm" novalidate ng-submit="personForm.$valid &&sendForm()" autocomplete="off">
+            <form class="form w-25 md-0 pb-2" action="" method="post" name="personForm" novalidate ng-submit="personForm.$valid &&sendForm()" autocomplete="off">
                 <a href="index.php">
                     <center><img src="assets/images/logo.png" alt="logo" height="100px" width="250px"></center>
                 </a>
@@ -94,8 +94,14 @@
                 <span class="error" ng-show="personForm.otp.$dirty&&personForm.otp.$error.pattern">OTP Should be 6 digits</span><br>
 
 
-                <input type="submit" name="submit" ng-disabled="!personForm.otp.$valid" value="Verify" class="login-button">
-                <!-- <p class="link">Already have an account? <a href="login.php">Login here</a></p> -->
+                <input style="border-radius: 10px" type="submit" name="submit" ng-disabled="!personForm.otp.$valid" value="Verify" class="login-button">
+
+                <div class="w-100 d-flex justify-content-center my-2">
+                <a href="resendotp.php" class=" text-right">
+                    <button type="button" class="btn btn-primary">Resend OTP</button>
+                    <!-- Resend OTP  -->
+                </a>
+                </div>
             </form>
         </div>
     <?php
