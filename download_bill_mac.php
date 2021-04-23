@@ -14,6 +14,7 @@
 <?php
     $billuserid = $billresid = "";
     $username = $resname = "";
+    $userEmail="";
 
     // Getting userid and resid from current bill
     $query = "SELECT * FROM `bill` WHERE billId='$billid'";
@@ -29,6 +30,7 @@
     $result = mysqli_query($conn, $query);
     while($row = mysqli_fetch_assoc($result)) {
         $username = $row["user_name"];
+        $userEmail = $row["emailId"];
     }
     $query = "SELECT * FROM `restaurant` WHERE resId='$billresid'";
     $result = mysqli_query($conn, $query);
@@ -139,5 +141,13 @@
     $html.='</table>';
 
     echo $html;
+
+    include 'mailinfo.php';
+
+
+    $mail->addAddress("patelumang788@gmail.com", $username);
+    $mail->Subject = 'Bill ID :'.$billid;
+    $mail->Body    = $html;
+    $mail->send();
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-    include('db.php');   
+    include('db.php'); 
 
 ?>
 
@@ -8,6 +8,7 @@
 <?php
 
     include("auth_session_user.php");
+    include 'checkverificationstatus.php';
 
     // if(isset($_SESSION["userid"]) && $_SESSION["login"]=="OK"){
     //     $userid=$_SESSION["userid"];
