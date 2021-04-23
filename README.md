@@ -17,24 +17,16 @@
 <!-- TABLE OF CONTENTS -->
 <details  open="open">
 <summary>Table of Contents</summary>
-<ol>
-<li>
-<a  href="#about-the-project">About The Project</a>
-<ul>
-<li><a  href="#built-with">Built With</a></li>
-</ul>
-</li>
-<li>
-<a  href="#getting-started">Getting Started</a>
-<ul>
-<li><a  href="#prerequisites">Prerequisites</a></li>
-</ul>
-</li>
-<li><a  href="#contributing">Contributing</a></li>
-<li><a  href="#license">License</a></li>
-<li><a  href="#contact">Contact</a></li>
-<li><a  href="#acknowledgements">Acknowledgements</a></li>
-</ol>
+  <ol>
+    <li>
+      <a  href="#about-the-project">About The Project</a>
+    </li>
+  </ul>
+  </li>
+  <li><a  href="#license">License</a></li>
+  <li><a  href="#contact">Contact</a></li>
+  <li><a  href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
 </details>
 
   
@@ -47,41 +39,6 @@
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 'NirmaEats' website connects you with a broad range of local restaurants around Nirma, so you can find your favourite food nearby whenever you want. Not only that, our state of the art recommendation system shows you restaurants which are specialy picked for you, based on your past orders and reviews. You can browse, order, review and download invoices among many other things. Please pay us a visit at http://nirmaeats.tech. 
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-
-  
-
-### Built With
-
-*  [Bootstrap](https://getbootstrap.com)
-*  [PHP](https://www.php.net/)
-*  [JS](https://www.javascript.com/)
-  
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-Download the code and follow these steps.
-1. Add the database first in Apache
-
-  
-
-### Prerequisites
-  
-  
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch
-3. Commit your Changes
-4. Push to the Branch
-5. Open a Pull Request
 
 <!-- LICENSE -->
 ## License
