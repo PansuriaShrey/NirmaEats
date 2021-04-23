@@ -142,12 +142,4 @@
 
     echo $html;
 
-    include 'mailinfo.php';
-
-
-    $mail->addAddress("patelumang788@gmail.com", $username);
-    $mail->Subject = 'Bill ID :'.$billid;
-    $mail->Body    = $html;
-    $mail->send();
-
 ?>
